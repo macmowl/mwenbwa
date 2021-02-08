@@ -30,11 +30,14 @@ app.listen(APP_PORT, () =>
 
 // Database Connection URL
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.DB_HOST, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect(
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.raher.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+    {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true,
+    },
+);
 mongoose.connection.on("error", () => {
     throw new Error(`Unable to connect to database`);
 });
