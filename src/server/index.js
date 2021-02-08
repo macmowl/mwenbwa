@@ -8,6 +8,9 @@
 
 import express from "express";
 import path from "path";
+import mongoose from "mongoose";
+import treeRoutes from "./routes/tree.routes";
+require("dotenv").config();
 
 const {APP_PORT} = process.env;
 
@@ -19,7 +22,22 @@ app.get("/hello", (req, res) => {
     console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
     res.send("Hello, World!");
 });
+app.use("/api/trees", treeRoutes);
 
 app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
 );
+
+// Database Connection URL
+mongoose.Promise = global.Promise;
+mongoose.connect(
+    "mongodb+srv://mernUser:gGtUIuiEbmQkpZQU@cluster0.raher.mongodb.net/MERN?retryWrites=true&w=majority",
+    {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true,
+    },
+);
+mongoose.connection.on("error", () => {
+    throw new Error(`Unable to connect to database`);
+});
