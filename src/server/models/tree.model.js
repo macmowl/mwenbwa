@@ -2,20 +2,8 @@ import {ObjectId} from "mongodb";
 import mongoose from "mongoose";
 
 const treeSchema = mongoose.Schema({
-    y_lambert72: {
-        type: Number,
-        required: true,
-    },
-    arbotag: {
-        type: Number,
-        required: true,
-    },
-    date_donnees: {
-        type: String,
-        required: true,
-    },
-    x_lambda: {
-        type: Number,
+    locked: {
+        type: Boolean,
         required: true,
     },
     geoloc: {
@@ -29,27 +17,19 @@ const treeSchema = mongoose.Schema({
             required: true,
         },
     },
-    hauteur_totale: {
+    height: {
         type: Number,
         required: true,
     },
-    x_lambert72: {
-        type: Number,
-        required: true,
-    },
-    y_phi: {
-        type: Number,
-        required: true,
-    },
-    nom_complet: {
+    latinName: {
         type: String,
         required: true,
     },
-    diametre_cime: {
-        type: Number,
+    generatedName: {
+        type: String,
         required: true,
     },
-    circomf: {
+    diameter: {
         type: Number,
         required: true,
     },

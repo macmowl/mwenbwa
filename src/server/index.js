@@ -30,14 +30,11 @@ app.listen(APP_PORT, () =>
 
 // Database Connection URL
 mongoose.Promise = global.Promise;
-mongoose.connect(
-    "mongodb+srv://mernUser:gGtUIuiEbmQkpZQU@cluster0.raher.mongodb.net/MERN?retryWrites=true&w=majority",
-    {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true,
-    },
-);
+mongoose.connect(process.env.DB_HOST, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+});
 mongoose.connection.on("error", () => {
     throw new Error(`Unable to connect to database`);
 });
