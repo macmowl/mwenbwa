@@ -10,10 +10,8 @@ import express from "express";
 import path from "path";
 import mongoose from "mongoose";
 import treeRoutes from "./routes/tree.routes";
-// import { json } from "body-parser";
-require("dotenv").config();
 
-const {APP_PORT} = process.env;
+const {APP_PORT, DB_USER, DB_PASS, DB_NAME} = process.env;
 
 const app = express();
 
@@ -32,7 +30,7 @@ app.listen(APP_PORT, () =>
 // Database Connection URL
 mongoose.Promise = global.Promise;
 mongoose.connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.raher.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+    `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.raher.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
     {
         useNewUrlParser: true,
         useCreateIndex: true,
