@@ -10,6 +10,7 @@ import express from "express";
 import path from "path";
 import mongoose from "mongoose";
 import treeRoutes from "./routes/tree.routes";
+// import { json } from "body-parser";
 require("dotenv").config();
 
 const {APP_PORT} = process.env;
