@@ -12,6 +12,22 @@ import mongoose from "mongoose";
 import treeRoutes from "./routes/tree.routes";
 
 const {APP_PORT, DB_USER, DB_PASS, DB_NAME} = process.env;
+console.log("debug: ", APP_PORT, DB_USER, DB_PASS, DB_NAME);
+
+// Database Connection URL
+mongoose.Promise = global.Promise;
+mongoose.connect(
+    `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.raher.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
+    {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true,
+    },
+    () => console.log("You are connected to the DB Atlas"),
+);
+mongoose.connection.on("error", () => {
+    throw new Error(`Unable to connect to database`);
+});
 
 const app = express();
 
@@ -26,17 +42,3 @@ app.use("/api/trees", treeRoutes);
 app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
 );
-
-// Database Connection URL
-mongoose.Promise = global.Promise;
-mongoose.connect(
-    `mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.raher.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`,
-    {
-        useNewUrlParser: true,
-        useCreateIndex: true,
-        useUnifiedTopology: true,
-    },
-);
-mongoose.connection.on("error", () => {
-    throw new Error(`Unable to connect to database`);
-});
