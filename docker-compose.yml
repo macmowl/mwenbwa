@@ -3,6 +3,9 @@
   services:
     node:
       image: "becodeorg/node"
+      environment:
+        NODE_ENV: "development"
+        APP_PORT: 12345
       env_file:
         - .env
       volumes:
