@@ -3,6 +3,8 @@
   services:
     node:
       image: "becodeorg/node"
+      environment: 
+        APP_PORT : 12345
       env_file:
         - .env
       volumes:
