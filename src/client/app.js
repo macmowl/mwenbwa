@@ -18,7 +18,7 @@ import GameMap from "./components/gamePage/map";
 
 const App = () => (
     <Router>
-        <div className={"navbar content is-medium"}>
+        <div className={"navbar content is-medium ml-6"}>
             <Link className={"navbar-item"} to={"/"}>
                 {"Home"}
             </Link>
