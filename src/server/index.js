@@ -39,6 +39,10 @@ app.get("/hello", (req, res) => {
 });
 app.use("/api/trees", treeRoutes);
 
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve("./bin/client/index.html"));
+});
+
 app.listen(APP_PORT, () =>
     console.log(`🚀 Server is listening on port ${APP_PORT}.`),
 );
