@@ -11,7 +11,7 @@ const Home = () => (
                     <div className={"column is-5 mx-6"}>
                         <img src={ReactLogo} alt={"React Logo"} />
                         <p className={"subtitle is-6 has-text-centered my-4"}>
-                            {"A wonderfull game of trees and leaves."}
+                            {"A wonderful game of trees and leaves."}
                         </p>
                         <p className={"has-text-centered"}>
                             <a
