@@ -10,3 +10,15 @@ p {
     font-family: "Raleway", sans-serif;
     line-height: 2;
 }
+
+/* ====== SIDEBAR ====== */
+
+.profilepic {
+    & img {border-radius:50%;
+    border:1px solid grey;}
+    & h4 {font-weight:bold;
+    & span {
+        display: inline-block;
+    }}}
+
+ .border-right{border-right:1px solid grey;}   
