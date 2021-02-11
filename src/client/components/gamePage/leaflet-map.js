@@ -1,10 +1,11 @@
 import React from "react";
-import {MapContainer, TileLayer} from "react-leaflet";
+import {MapContainer, TileLayer, Marker} from "react-leaflet";
 import treeData from "../../../../data/bintrees.json";
 
 const LeafletMap = () => {
-    // const [activeTree, setAcativeTree] = useState(null);
-    console.log(treeData);
+    const treesMarker = treeData.map(tree => (
+        <Marker key={tree._id.$oid} position={tree.location.coordinates} />
+    ));
     return (
         <MapContainer center={[50.64497, 5.57333]} zoom={16}>
             <TileLayer
@@ -13,14 +14,7 @@ const LeafletMap = () => {
                 }
                 url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
             />
-            {/* {treeData.map(tree => (
-                    <Marker position={[
-                        tree.location.coordinates[1],
-                        tree.location.coordinates[0]
-                    ]}>
-                    
-                    </Marker>
-                ))} */}
+            {treesMarker}
         </MapContainer>
     );
 };
