@@ -4,10 +4,16 @@ import Register from "./register";
 import Logosmall from "./logo_register-login";
 
 const ConnectPage = () => (
-    <div className={"container is-flex"}>
-        <Login />
-        <Register />
-        <Logosmall />
+    <div>
+        <div className={"container"}>
+            <Logosmall />
+        </div>
+        <div className={"container"}>
+            <div className={"columns is-vcentered"}>
+                <Login />
+                <Register />
+            </div>
+        </div>
     </div>
 );
 

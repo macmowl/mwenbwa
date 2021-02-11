@@ -2,7 +2,7 @@
 import React from "react";
 
 const Logosmall = () => (
-    <div className={"d-flex has-text-right"}>
+    <div className={"has-text-right"}>
         <svg width={107.136} height={38.608} viewBox={"0 0 107.136 38.608"}>
             <defs>
                 <style>
