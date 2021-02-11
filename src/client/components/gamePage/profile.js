@@ -6,7 +6,7 @@ const Profile = () => (
     <>
         <UserDetails />
         <Button />
-        <p>{"GAmelog"}</p>
+        <p>{"Gamelog"}</p>
         <p>{"ranking"}</p>
         <p>{"logout"}</p>
     </>
