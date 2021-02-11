@@ -40,7 +40,7 @@ const Register = () => (
             </div>
         </div>
 
-        <div className={"register-icon"}>
+        <div className={"register-icon mt-5"}>
             <h5 className={"subtitle is-5"}>{"Pick your color"}</h5>
             <div className={"is-flex is-justify-content-center mr-2"}>
                 <FontAwesomeIcon
