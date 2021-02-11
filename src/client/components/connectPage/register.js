@@ -1,7 +1,7 @@
 import React from "react";
 
 const Register = () => (
-    <div className={"register-content is half column px-6 "}>
+    <div className={"register-content border-left is half column px-6 "}>
         <h1 className={"title has-text-grey"}>{"Register"}</h1>
         <h2 className={"subtitle has-text-grey"}>{"Create your account"}</h2>
 
