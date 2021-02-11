@@ -4,7 +4,7 @@ import {faCircle} from "@fortawesome/free-solid-svg-icons";
 
 const Register = () => (
     <div className={"register-content border-left is-half column px-6 "}>
-        <h1 className={"title has-text-grey"}>{"Register"}</h1>
+        <h1 className={"title is-1 has-text-grey"}>{"Register"}</h1>
         <h2 className={"subtitle has-text-grey"}>{"Create your account"}</h2>
 
         <div className={"field"}>

@@ -2,7 +2,7 @@ import React from "react";
 
 const Login = () => (
     <div className={"login-content is-half column px-6 minimum-height"}>
-        <h1 className={"title has-text-grey"}>{"Login"}</h1>
+        <h1 className={"title is-1 has-text-grey"}>{"Login"}</h1>
         <h2 className={"subtitle has-text-grey"}>{"Log in to your account"}</h2>
 
         <div className={"field"}>
