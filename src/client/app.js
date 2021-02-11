@@ -9,6 +9,7 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import "./style.scss";
+import "bulma";
 
 import HelloWorld from "./components/hello";
 
