@@ -1,7 +1,7 @@
 import React from "react";
 
 const Login = () => (
-    <div className={"login-content is-half column "}>
+    <div className={"login-content is-half column px-6 "}>
         <h1 className={"title has-text-grey"}>{"Login"}</h1>
         <h2 className={"subtitle has-text-grey"}>{"Log in to your account"}</h2>
 
