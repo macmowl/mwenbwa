@@ -6,7 +6,7 @@ const treeSchema = mongoose.Schema({
         type: Boolean,
         required: true,
     },
-    geoloc: {
+    location: {
         type: {
             type: String,
             enum: ["Point"],
