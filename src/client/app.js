@@ -18,9 +18,15 @@ import GameMap from "./components/gamePage/map";
 
 const App = () => (
     <Router>
-        <Link to={"/"}>{"Home"}</Link>
-        <Link to={"/map"}>{"map"}</Link>
-        <Link to={"/sign"}>{"Signin"}</Link>
+        <Link className={"navbar-item"} to={"/"}>
+            {"Home"}
+        </Link>
+        <Link className={"navbar-item"} to={"/map"}>
+            {"map"}
+        </Link>
+        <Link className={"navbar-item"} to={"/sign"}>
+            {"Signin"}
+        </Link>
 
         <Route exact path={"/"} component={Home} />
         <Route exact path={"/map"} component={GameMap} />
