@@ -1,15 +1,15 @@
 import React from "react";
 
 const Register = () => (
-    <div className={"register-content is half column"}>
-        <h1 className={"title"}>{"Register"}</h1>
-        <h2 className={"subtitle"}>{"Create your account"}</h2>
+    <div className={"register-content is half column "}>
+        <h1 className={"title has-text-grey"}>{"Register"}</h1>
+        <h2 className={"subtitle has-text-grey"}>{"Create your account"}</h2>
 
         <div className={"field"}>
-            <label className={"label"}>{"Name"}</label>
+            <label className={"label has-text-grey"}>{"Name"}</label>
             <div className={"control"}>
                 <input
-                    className={"input is-medium is-rounded"}
+                    className={"input has-text-grey is-medium is-rounded"}
                     type={"text"}
                     placeholder={"Enter your name"}
                 />
@@ -17,10 +17,10 @@ const Register = () => (
         </div>
 
         <div className={"field"}>
-            <label className={"label"}>{"Email"}</label>
+            <label className={"label has-text-grey"}>{"Email"}</label>
             <div className={"control"}>
                 <input
-                    className={"input is-medium is-rounded"}
+                    className={"input has-text-grey is-medium is-rounded"}
                     type={"email"}
                     placeholder={"Enter your email adress"}
                 />
@@ -28,10 +28,10 @@ const Register = () => (
         </div>
 
         <div className={"field"}>
-            <label className={"label"}>{"Password"}</label>
+            <label className={"label has-text-grey"}>{"Password"}</label>
             <div className={"control"}>
                 <input
-                    className={"input is-medium is-rounded"}
+                    className={"input has-text-grey is-medium is-rounded"}
                     type={"password"}
                     placeholder={"**********"}
                 />
@@ -59,6 +59,11 @@ const Register = () => (
                 <i className={"fas fa-lg-border-circle"} />
             </span>
         </div>
+        <p className={"has-text-centered"}>
+            <a className={"button is-medium is-primary is-rounded"}>
+                {" Register "}
+            </a>
+        </p>
     </div>
 );
 
