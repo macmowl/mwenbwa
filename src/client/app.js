@@ -10,6 +10,7 @@ import * as React from "react";
 import ReactDOM from "react-dom";
 import "./style.scss";
 import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import "bulma";
 
 import Home from "./components/homePage/home";
 import ConnectPage from "./components/connectPage/sign";
