@@ -9,12 +9,13 @@
 import * as React from "react";
 import ReactDOM from "react-dom";
 import "./style.scss";
-import {BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
 import "bulma";
 
 import Home from "./components/homePage/home";
 import ConnectPage from "./components/connectPage/sign";
 import GameMap from "./components/gamePage/map";
+import Error404 from "./components/homePage/error404";
 
 const App = () => (
     <Router>
@@ -29,9 +30,12 @@ const App = () => (
                 {"Signin"}
             </Link>
         </div>
-        <Route exact path={"/"} component={Home} />
-        <Route exact path={"/map"} component={GameMap} />
-        <Route exact path={"/sign"} component={ConnectPage} />
+        <Switch>
+            <Route exact path={"/"} component={Home} />
+            <Route exact path={"/map"} component={GameMap} />
+            <Route exact path={"/sign"} component={ConnectPage} />
+            <Route path={"/"} component={Error404} />
+        </Switch>
     </Router>
 );
 
