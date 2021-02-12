@@ -16,7 +16,9 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+input,
+label {
     font-family: "Raleway", sans-serif;
     line-height: 2;
 }
@@ -47,3 +49,16 @@ p {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
+/* ====== SIGN IN - LOGIN ====== */
+.border-left {
+    border-left: 1px solid grey;
+}
+
+.button {
+    background: linear-gradient(to left, #7eb27c, #2fb5bd);
+    width: 35%;
+}
+
+/*.minimum-height {
+    height: min-content;
+  }*/

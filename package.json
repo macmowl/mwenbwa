@@ -42,7 +42,7 @@
     "node-sass": "^5.0.0",
     "prettier": "^2.0.5",
     "style-loader": "^2.0.0",
-    "uglifyjs-webpack-plugin": "^2.2.0",
+    "uglifyjs-webpack-plugin": "^1.1.2",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   },
@@ -55,8 +55,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "leaflet": "^1.7.1",
-    "mapbox-gl": "^2.1.1",
-    "mapbox-gl-leaflet": "0.0.14",
+    "mini-create-react-context": "^0.4.1",
     "mongoose": "^5.11.15",
     "mongoose-unique-validator": "^2.0.3",
     "react": "^16.13.1",
