@@ -1,14 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import '~leaflet/dist/leaflet.css';
-// Variables
 
-$green : #8BB174;
-$Blue : #21B6D1;
-$Kaki : #B1A96E;
-$yellow : #E6BC25;
 
-// format bulma variable
-$primary: $Blue;
 
 h1,
 h2,
@@ -23,6 +16,8 @@ label {
     line-height: 2;
 }
 
+.button {border:1px solid rgb(158, 158, 158);}
+
 /* ====== SIDEBAR ====== */
 
 .profilepic {
@@ -33,11 +28,26 @@ label {
         display: inline-block;
     }}}
 
- .border-right{border-right:1px solid grey;}   
+ .border-right{border-right:1px solid rgb(194, 194, 194);}   
 
- .level .is-mobile .level-item {
-    margin: 0.2rem!important;
-  }
+ .mobileUtils {position:absolute;
+z-index:3000;
+right:0;}
+
+.mobileTreeInfo {position:absolute;
+    z-index:3000;
+    width:100vw;
+    bottom:-60px;
+    padding:2rem;
+
+}
+
+
+ .is-transparent {
+    background-color: transparent!important;
+    background-image: none;
+    }
+
 
 // -------- Leaflet Map Integration --------
 .leaflet-container {
@@ -54,7 +64,8 @@ label {
     border-left: 1px solid grey;
 }
 
-.button {
+.btn {
+    color:white!important;
     background: linear-gradient(to left, #7eb27c, #2fb5bd);
     width: 35%;
 }

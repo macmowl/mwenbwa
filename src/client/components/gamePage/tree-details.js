@@ -35,10 +35,7 @@ const TreeDetails = () => (
                     />
                 </g>
             </svg>
-            <p
-                className={
-                    "has-text-weight-bold has-text-black is-size-6-mobile"
-                }>
+            <p className={"has-text-weight-bold has-text-black"}>
                 {"Honeylocust (Gleditsia)"}
             </p>
 
@@ -156,6 +153,49 @@ const TreeDetails = () => (
                 </g>
             </svg>
             {"278"}
+            <p className={"mt-1 has-text-centered"}>
+                <a
+                    className={
+                        "button is-small is-info has-text-white is-rounded"
+                    }>
+                    {" Buy "}
+                </a>
+            </p>
+            <div className={"is-inline-block has-text-centered"}>
+                <table className={"is-inline-block my-4 is-size-7"}>
+                    <thead>
+                        <tr>
+                            <th>{"Owner"}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>{"Suzy"}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <table className={"is-size-7"}>
+                    <thead>
+                        <tr>
+                            <th>{"Previous owners"}</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>{"Luke"}</td>
+                        </tr>
+                        <tr>
+                            <td>{"Lorelai"}</td>
+                        </tr>
+                        <tr>
+                            <td>{"Rory"}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </>
 );

@@ -4,12 +4,16 @@ import Profile from "./profile";
 import TreeDetails from "./tree-details";
 import LeafletMap from "./leaflet-map";
 
-import {faSignOutAlt} from "@fortawesome/free-solid-svg-icons";
+import {
+    faClock,
+    faSignOutAlt,
+    faUsers,
+} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const GameMap = () => (
     <>
-        <MediaQuery minDeviceWidth={1280}>
+        <MediaQuery minDeviceWidth={1008}>
             <div className={"columns is-gapless is-multiline is-mobile"}>
                 <div className={"column"}>
                     <LeafletMap />
@@ -20,7 +24,7 @@ const GameMap = () => (
                         "column is-two-fifth-tablet is-one-fifth-desktop is-one-fifth-widescreen"
                     }>
                     <div className={"Sidebar"}>
-                        <div className={"level-right mx-5 mb-5"}>
+                        <div className={"level-right mx-5 my-5"}>
                             <svg
                                 width={48.244}
                                 height={17.817}
@@ -98,8 +102,8 @@ const GameMap = () => (
                 </div>
             </div>
         </MediaQuery>
-        <MediaQuery maxDeviceWidth={375}>
-            <nav className={"mb-0 p-2 level is-mobile"}>
+        <MediaQuery maxDeviceWidth={768}>
+            <div className={"mb-0 p-3 level is-mobile"}>
                 <div className={"level-left"}>
                     <div className={"level-item"}>
                         <h4 className={"is-size-6 has-text-weight-bold"}>
@@ -120,16 +124,48 @@ const GameMap = () => (
                 </div>
 
                 <div className={"level-right"}>
-                    <p className={"is-size-7"}>
-                        <a
+                    <p className={"mr-2"}>
+                        <span
                             className={
-                                "button is-light is-rounded mr-1 is-small"
+                                "button is-small is-primary has-text-weight-bold mr-2"
                             }>
-                            <FontAwesomeIcon icon={faSignOutAlt} />
-                        </a>
+                            {"10"}
+                        </span>
+                        {"trees"}
+                    </p>
+                    <p className={"mr-2"}>
+                        <span
+                            className={
+                                "button is-small is-success has-text-white has-text-weight-bold mr-2"
+                            }>
+                            {"603"}
+                        </span>
+                        {"leaves"}
                     </p>
                 </div>
-            </nav>
+            </div>
+
+            <div className={"mobileUtils is-transparent mb-0 p-2"}>
+                <p className={"is-size-7"}>
+                    <a className={"button is-light is-rounded m-1 is-small"}>
+                        <FontAwesomeIcon icon={faClock} />
+                    </a>
+                </p>
+                <p className={"is-size-7"}>
+                    <a className={"button is-light is-rounded m-1 is-small"}>
+                        <FontAwesomeIcon icon={faUsers} />
+                    </a>
+                </p>
+                <p className={"is-size-7"}>
+                    <a className={"button is-light is-rounded m-1 is-small"}>
+                        <FontAwesomeIcon icon={faSignOutAlt} />
+                    </a>
+                </p>
+            </div>
+
+            <div className={"mobileTreeInfo has-background-primary-light"}>
+                {"Bob"}
+            </div>
 
             <LeafletMap />
         </MediaQuery>
