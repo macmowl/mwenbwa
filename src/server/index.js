@@ -12,7 +12,6 @@ import mongoose from "mongoose";
 import treeRoutes from "./routes/tree.routes";
 
 const {APP_PORT, DB_USER, DB_PASS, DB_NAME} = process.env;
-console.log("debug: ", APP_PORT, DB_USER, DB_PASS, DB_NAME);
 
 // Database Connection URL
 mongoose.Promise = global.Promise;
