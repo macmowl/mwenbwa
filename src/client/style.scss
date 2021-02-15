@@ -49,6 +49,17 @@ label {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
+
+/* Customize the Clustered Markers */
+.marker-cluster-custom {
+    background-image: url('./assets/map-icon/tree10.svg');
+    color: black;
+    height: 69px;
+    line-height: 37px;
+    text-align: center;
+    width: 47px;
+}
+
 /* ====== SIGN IN - LOGIN ====== */
 .border-left {
     border-left: 1px solid grey;
