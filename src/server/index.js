@@ -10,6 +10,7 @@ import express from "express";
 import path from "path";
 import mongoose from "mongoose";
 import treeRoutes from "./routes/tree.routes";
+import userRoutes from "./routes/user.routes";
 
 const {APP_PORT, DB_USER, DB_PASS, DB_NAME} = process.env;
 console.log("debug: ", APP_PORT, DB_USER, DB_PASS, DB_NAME);
@@ -38,6 +39,7 @@ app.get("/hello", (req, res) => {
     res.send("Hello, World!");
 });
 app.use("/api/trees", treeRoutes);
+app.use("/api/auth", userRoutes);
 
 app.get("*", (req, res) => {
     res.sendFile(path.resolve("./bin/client/index.html"));
