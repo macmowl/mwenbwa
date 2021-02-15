@@ -2,11 +2,11 @@
 /* eslint-disable arrow-parens */
 /* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
-const bcrypt = require("bcrypt");
+const bcryptjs = require("bcryptjs");
 const User = require("../models/user.model");
 // eslint-disable-next-line no-unused-vars
 exports.register = (req, res, next) => {
-    bcrypt
+    bcryptjs
         .hash(req.body.password, 10)
         .then((hash) => {
             const user = new User({
@@ -30,7 +30,7 @@ exports.login = (req, res, next) => {
                     .status(401)
                     .json({error: "Utilisateur non trouvé !'"});
             }
-            bcrypt
+            bcryptjs
                 .compare(req.body.password, user.password)
                 // eslint-disable-next-line consistent-return
                 // eslint-disable-next-line prettier/prettier
