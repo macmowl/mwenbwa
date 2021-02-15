@@ -4,6 +4,7 @@
 /* eslint-disable consistent-return */
 const bcryptjs = require("bcryptjs");
 const User = require("../models/user.model");
+const jwt = require("jsonwebtoken");
 // eslint-disable-next-line no-unused-vars
 exports.register = (req, res, next) => {
     bcryptjs
@@ -42,7 +43,11 @@ exports.login = (req, res, next) => {
                     }
                     res.status(200).json({
                         userId: user._id,
-                        token: "TOKEN",
+                        token: jwt.sign(
+                            {userId: user._id},
+                            "RANDOM_TOKEN_SECRET",
+                            {expiresIn: "24h"},
+                        ),
                     });
                 })
                 .catch((error) => res.status(500).json({error}));
