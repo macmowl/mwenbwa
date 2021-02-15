@@ -38,8 +38,9 @@ app.get("/hello", (req, res) => {
     console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
     res.send("Hello, World!");
 });
+// Define routes
 app.use("/api/trees", treeRoutes);
-app.use("/api/auth", userRoutes);
+app.use("/api/users", userRoutes);
 
 app.get("*", (req, res) => {
     res.sendFile(path.resolve("./bin/client/index.html"));
