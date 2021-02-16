@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/auth");
+//const auth = require("../middleware/auth");
 const {check} = require("express-validator");
 
 const userCtrl = require("../controllers/user.controller");
 
-router.get("/", auth, userCtrl.getAllUsers);
-router.get("/:id", auth, userCtrl.getOneUser);
+// router.get("/", auth, userCtrl.getAllUsers);
+// router.get("/:id", auth, userCtrl.getOneUser);
 router.post(
     "/register",
     [
@@ -27,7 +27,7 @@ router.post(
     ],
     userCtrl.login,
 );
-router.put("/:id", auth, userCtrl.updateUser);
-router.delete("/:id", auth, userCtrl.deleteUser);
+// router.put("/:id", auth, userCtrl.updateUser);
+// router.delete("/:id", auth, userCtrl.deleteUser);
 
 module.exports = router;

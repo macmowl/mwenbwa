@@ -33,6 +33,8 @@ mongoose.connection.on("error", () => {
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 app.get("/hello", (req, res) => {
     console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
