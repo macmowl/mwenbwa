@@ -55,6 +55,11 @@ function Register() {
                     </a>
                 </p>
             </div>
+            <p className={"has-text-centered mt-5"}>
+                <a className={"button is-medium is-primary is-rounded"}>
+                    {" Register "}
+                </a>
+            </p>
         </div>
     );
     //function register()
