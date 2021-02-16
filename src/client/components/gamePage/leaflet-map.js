@@ -7,14 +7,14 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import ReactDomServer from "react-dom/server";
 
 const LeafletMap = () => {
-    const setIconTree = (shape, height, color) =>
+    const setIconTree = (shape, color) =>
         divIcon({
             html: ReactDomServer.renderToString(
                 <div>
                     <TreeIcon shape={shape} color={color} />
                 </div>,
             ),
-            className: "marker-cluster-custom",
+            className: "",
             iconSize: [19, 54],
             iconAnchor: [19, 54],
         });
@@ -31,7 +31,7 @@ const LeafletMap = () => {
         <Marker
             key={tree._id.$oid}
             position={tree.location.coordinates}
-            icon={setIconTree(tree.shape, tree.height, tree.color)}
+            icon={setIconTree(tree.shape, tree.color)}
         />
     ));
 
