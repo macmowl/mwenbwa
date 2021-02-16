@@ -17,7 +17,7 @@ exports.register = (req, res, next) => {
                 email: req.body.email,
                 username: req.body.username, //required
                 password: hash,
-                color: req.body.username, //required
+                color: req.body.color, //required
             });
 
             user.save()
