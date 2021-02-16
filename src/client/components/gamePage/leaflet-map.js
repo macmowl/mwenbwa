@@ -1,26 +1,29 @@
 import React from "react";
 import {MapContainer, TileLayer, Marker} from "react-leaflet";
 import treeData from "../../../../data/bintrees.json";
-import {Icon, divIcon, point} from "leaflet";
-// import * as L from "leaflet";
-import {treeShapes} from "../../core/constants";
+import {divIcon, point} from "leaflet";
+import TreeIcon from "./../tree-icon";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import ReactDomServer from "react-dom/server";
 
 const LeafletMap = () => {
-    const setIconTree = shape => {
-        const treeIcon = new Icon({
-            iconUrl: treeShapes[shape],
-            iconSize: [25, 35],
-            iconAnchor: [25, 17],
+    const setIconTree = (shape, height, color) =>
+        divIcon({
+            html: ReactDomServer.renderToString(
+                <div>
+                    <TreeIcon shape={shape} color={color} />
+                </div>,
+            ),
+            className: "marker-cluster-custom",
+            iconSize: [19, 54],
+            iconAnchor: [19, 54],
         });
-        return treeIcon;
-    };
 
     const createClusterCustomIcon = function (cluster) {
         return divIcon({
             html: `${cluster.getChildCount()}`,
             className: "marker-cluster-custom",
-            iconSize: point(47, 69, true),
+            iconSize: point(50, 46, true),
         });
     };
 
@@ -28,7 +31,7 @@ const LeafletMap = () => {
         <Marker
             key={tree._id.$oid}
             position={tree.location.coordinates}
-            icon={setIconTree(tree.shape)}
+            icon={setIconTree(tree.shape, tree.height, tree.color)}
         />
     ));
 
