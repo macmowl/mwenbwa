@@ -63,7 +63,9 @@ right:0;}
 /* Customize the Clustered Markers */
 .marker-cluster-custom {
     background-image: url('./assets/map-icon/cluster_multi.png');
-    color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 1.1rem;
     height: 46px;
     line-height: 37px;
     text-align: center;
