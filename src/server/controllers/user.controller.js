@@ -11,26 +11,22 @@ const {validationResult} = require("express-validator");
 // eslint-disable-next-line no-unused-vars
 exports.register = (req, res, next) => {
     bcrypt
-    .hash(req.body.password, 10)
-    .then((hash) => {
-       
+        .hash(req.body.password, 10)
+        .then((hash) => {
             const user = new User({
                 email: req.body.email,
-                username: req.body.username,//required
+                username: req.body.username, //required
                 password: hash,
-                color: "#7FBA28" //required
-                
+                color: req.body.username, //required
             });
 
             user.save()
-            .then(() =>
-                res.status(201).json({message: "Utilisateur créé !"}),
-            )
-            .catch((error) => res.status(400).json({error}));
-
-    })
-    .catch((error) => res.status(500).json({"AIE AIE " : error}));
-     
+                .then(() =>
+                    res.status(201).json({message: "Utilisateur créé !"}),
+                )
+                .catch((error) => res.status(400).json({error}));
+        })
+        .catch((error) => res.status(500).json({"AIE AIE ": error}));
 };
 
 exports.login = (req, res, next) => {
