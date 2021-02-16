@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {FREE_TREE_COLORS} from "../core/constants.js";
 import Tree1 from "../assets/map-icon/tree1.svg";
 import Tree2 from "../assets/map-icon/tree2.svg";
 import Tree3 from "../assets/map-icon/tree3.svg";
@@ -9,8 +10,7 @@ import Tree6 from "../assets/map-icon/tree6.svg";
 const TreeIcon = ({shape, color}) => {
     const [fillTree, setFillTree] = useState(color);
     if (fillTree === null) {
-        const TREE_COLORS = ["#547A1B", "#89C72C", "#7FBA28", "#6FA123"];
-        setFillTree(TREE_COLORS[Math.floor(Math.random() * 4)]);
+        setFillTree(FREE_TREE_COLORS[Math.floor(Math.random() * 4)]);
     }
 
     return (
