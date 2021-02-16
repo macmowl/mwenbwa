@@ -6,16 +6,11 @@ export class CircleColor extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.handleChangeComplete = this.handleChangeComplete.bind(this);
+
         this.handleOnChange = this.handleOnChange.bind(this);
     }
 
     handleOnChange(color) {
-        console.log(color);
-        this.setState({color});
-    }
-
-    handleChangeComplete(color) {
         console.log(color);
         this.setState({color});
     }
@@ -35,7 +30,6 @@ export class CircleColor extends Component {
                         ]}
                         color={this.state.color}
                         onChange={this.handleOnChange}
-                        onChangeComplete={this.handleChangeComplete}
                     />
                 </Fragment>
             </>
