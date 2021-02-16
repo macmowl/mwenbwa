@@ -191,7 +191,7 @@ const UserDetails = () => (
                 </div>
             </div>
             <p className={"has-text-centered"}>
-                <a className={"button is-small is-primary is-rounded"}>
+                <a className={"button is-small btn is-rounded"}>
                     {" Settings "}
                 </a>
             </p>
