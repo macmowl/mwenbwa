@@ -1,6 +1,5 @@
 import React from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircle} from "@fortawesome/free-solid-svg-icons";
+import CirclePicker from "./color";
 
 const Register = () => (
     <div className={"register-content border-left is-half column px-6 "}>
@@ -43,42 +42,7 @@ const Register = () => (
         <div className={"register-icon mt-5"}>
             <h5 className={"subtitle is-5"}>{"Pick your color"}</h5>
             <div className={"is-flex is-justify-content-center mr-2"}>
-                <FontAwesomeIcon
-                    className={"mr-3"}
-                    icon={faCircle}
-                    size={"2x"}
-                    color={"#FF0000"}
-                />{" "}
-                <FontAwesomeIcon
-                    className={"mr-3"}
-                    icon={faCircle}
-                    size={"2x"}
-                    color={"#FF7E00"}
-                />{" "}
-                <FontAwesomeIcon
-                    className={"mr-3"}
-                    icon={faCircle}
-                    size={"2x"}
-                    color={"#FEB900"}
-                />{" "}
-                <FontAwesomeIcon
-                    className={"mr-3"}
-                    icon={faCircle}
-                    size={"2x"}
-                    color={"#73D709"}
-                />{" "}
-                <FontAwesomeIcon
-                    className={"mr-3"}
-                    icon={faCircle}
-                    size={"2x"}
-                    color={"#15CEDF"}
-                />{" "}
-                <FontAwesomeIcon
-                    className={"mr-3"}
-                    icon={faCircle}
-                    size={"2x"}
-                    color={"#0085FF"}
-                />
+                <CirclePicker />
             </div>
         </div>
         <p className={"has-text-centered mt-5"}>
