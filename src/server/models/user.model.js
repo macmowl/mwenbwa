@@ -18,6 +18,8 @@ const userSchema = mongoose.Schema({
     username: {
         type: String,
         required: true,
+        trim: true,
+        minLength: 4,
     },
     color: {
         type: String,
@@ -30,6 +32,10 @@ const userSchema = mongoose.Schema({
         type: [ObjectId],
     },
     created: {
+        type: Date,
+        default: Date.now,
+    },
+    updated: {
         type: Date,
     },
 });

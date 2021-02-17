@@ -10,6 +10,7 @@ import express from "express";
 import path from "path";
 import mongoose from "mongoose";
 import treeRoutes from "./routes/tree.routes";
+import userRoutes from "./routes/user.routes";
 
 const {APP_PORT, DB_USER, DB_PASS, DB_NAME} = process.env;
 
@@ -31,12 +32,16 @@ mongoose.connection.on("error", () => {
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
 app.get("/hello", (req, res) => {
     console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
     res.send("Hello, World!");
 });
+// Define routes
 app.use("/api/trees", treeRoutes);
+app.use("/api/users", userRoutes);
 
 app.get("*", (req, res) => {
     res.sendFile(path.resolve("./bin/client/index.html"));
