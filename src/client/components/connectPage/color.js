@@ -21,12 +21,12 @@ export class CircleColor extends Component {
                 <Fragment>
                     <CirclePicker
                         colors={[
-                            "#2196f3",
-                            "#03a9f4",
-                            "#00bcd4",
-                            "#009688",
-                            "#4caf50",
-                            "#8bc34a",
+                            "#FF0100",
+                            "#FF7E00",
+                            "#FEB902",
+                            "#73D708",
+                            "#16CEDF",
+                            "#0085FF",
                         ]}
                         color={this.state.color}
                         onChange={this.handleOnChange}
