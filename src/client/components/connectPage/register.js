@@ -56,7 +56,7 @@ function Register() {
                 </p>
             </div>
             <p className={"has-text-centered mt-5"}>
-                <a className={"button is-medium is-primary is-rounded"}>
+                <a className={"button btn is-medium is-primary is-rounded"}>
                     {" Register "}
                 </a>
             </p>
