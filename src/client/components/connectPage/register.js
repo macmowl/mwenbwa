@@ -48,10 +48,10 @@ const Register = () => {
         if (color.length === 0) {
             colorErr1.colorChoice = "Color can't be empty";
         }
-        setNameErr(nameErr);
-        setEmailErr(emailErr);
-        setPasswordErr(passwordErr);
-        setColorErr(colorErr);
+        setNameErr(nameErr1);
+        setEmailErr(emailErr1);
+        setPasswordErr(passwordErr1);
+        setColorErr(colorErr1);
         return isValid;
     };
 
