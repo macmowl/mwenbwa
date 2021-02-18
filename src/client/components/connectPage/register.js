@@ -9,15 +9,53 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [color, setColor] = useState("");
 
-    const handleColor = (selectedColor) => {
+    const handleColor = selectedColor => {
         setColor(selectedColor.hex);
     };
     const [nameErr, setNameErr] = useState({}); //for error
     const [emailErr, setEmailErr] = useState({});
     const [passwordErr, setPasswordErr] = useState({});
     const [colorErr, setColorErr] = useState({});
+    const formValidation = () => {
+        const nameErr1 = {};
+        const emailErr1 = {};
+        const passwordErr1 = {};
+        const colorErr1 = {};
+        let isValid = true;
 
-    const handleSubmit = (e) => {
+        if (name.trim().length < 5) {
+            nameErr1.nameShort = "Your name is too short!";
+            isValid = false;
+        }
+        if (name.trim().length > 15) {
+            nameErr1.nameLong = "Your name is too long!";
+            isValid = false;
+        }
+        if (email.length < 5) {
+            emailErr1.emailShort = "Email should be at least 5 characters long";
+        }
+        if (email.split("").filter(x => x === "@").length !== 1) {
+            emailErr1.emailCharact = "Email should contain a @";
+        }
+        if (!email.includes(".")) {
+            emailErr1.emailDot = "Email should contain at least one dot";
+        }
+
+        if (password.length < 6) {
+            passwordErr1.passwordShort =
+                "Password should be at least 6 characters long";
+        }
+        if (color.length === 0) {
+            colorErr1.colorChoice = "Color can't be empty";
+        }
+        setNameErr(nameErr);
+        setEmailErr(emailErr);
+        setPasswordErr(passwordErr);
+        setColorErr(colorErr);
+        return isValid;
+    };
+
+    const handleSubmit = e => {
         e.preventDefault();
         formValidation();
         const user = {
@@ -28,44 +66,7 @@ const Register = () => {
         };
         createUser(user);
     };
-    const formValidation = () => {
-        const nameErr = {};
-        const emailErr = {};
-        const passwordErr = {};
-        const colorErr = {};
-        let isValid = true;
 
-        if (name.trim().length < 5) {
-            nameErr.nameShort = "Your name is too short!";
-            isValid = false;
-        }
-        if (name.trim().length > 15) {
-            nameErr.nameLong = "Your name is too long!";
-            isValid = false;
-        }
-        if (email.length < 5) {
-            emailErr.emailShort = "Email should be at least 5 characters long";
-        }
-        if (email.split("").filter((x) => x === "@").length !== 1) {
-            emailErr.emailCharact = "Email should contain a @";
-        }
-        if (!email.includes(".")) {
-            emailErr.emailDot = "Email should contain at least one dot";
-        }
-
-        if (password.length < 6) {
-            passwordErr.passwordShort =
-                "Password should be at least 6 characters long";
-        }
-        if (color.length === 0) {
-            colorErr.colorChoice = "Color can't be empty";
-        }
-        setNameErr(nameErr);
-        setEmailErr(emailErr);
-        setPasswordErr(passwordErr);
-        setColorErr(colorErr);
-        return isValid;
-    };
     return (
         <div className={"border-left is-half column px-6"}>
             <div className={"register-content"}>
@@ -86,10 +87,10 @@ const Register = () => {
                             placeholder={"Enter your name"}
                             name={"name"}
                             value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={e => setName(e.target.value)}
                         />
-                        {Object.keys(nameErr).map((key, index) => (
-                            <p className={"help is-danger"} key={index}>
+                        {Object.keys(nameErr).map(key => (
+                            <p className={"help is-danger"} key={name.id}>
                                 {nameErr[key]}
                             </p>
                         ))}
@@ -107,10 +108,10 @@ const Register = () => {
                             placeholder={"Enter your email address"}
                             name={"email"}
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={e => setEmail(e.target.value)}
                         />
-                        {Object.keys(emailErr).map((key, index) => (
-                            <p className={"help is-danger"} key={index}>
+                        {Object.keys(emailErr).map(key => (
+                            <p className={"help is-danger"} key={email.id}>
                                 {emailErr[key]}
                             </p>
                         ))}
@@ -125,10 +126,10 @@ const Register = () => {
                         placeholder={"**********"}
                         name={"password"}
                         value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        onChange={e => setPassword(e.target.value)}
                     />
-                    {Object.keys(passwordErr).map((key, index) => (
-                        <p className={"help is-danger"} key={index}>
+                    {Object.keys(passwordErr).map(key => (
+                        <p className={"help is-danger"} key={password.id}>
                             {passwordErr[key]}
                         </p>
                     ))}
@@ -148,8 +149,8 @@ const Register = () => {
                                 onChange={handleColor}
                             />
                         </div>
-                        {Object.keys(colorErr).map((key, index) => (
-                            <p className={"help is-danger"} key={index}>
+                        {Object.keys(colorErr).map(key => (
+                            <p className={"help is-danger"} key={color.id}>
                                 {colorErr[key]}
                             </p>
                         ))}
