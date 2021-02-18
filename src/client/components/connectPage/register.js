@@ -19,7 +19,7 @@ const Register = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const isValid = formValidation();
+        formValidation();
         const user = {
             email,
             username: name,
@@ -49,7 +49,7 @@ const Register = () => {
         if (email.split("").filter((x) => x === "@").length !== 1) {
             emailErr.emailCharact = "Email should contain a @";
         }
-        if (email.indexOf(".") === -1) {
+        if (!email.includes(".")) {
             emailErr.emailDot = "Email should contain at least one dot";
         }
 
@@ -88,13 +88,11 @@ const Register = () => {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
-                        {Object.keys(nameErr).map((key) => {
-                            return (
-                                <p className={"help is-danger"}>
-                                    {nameErr[key]}
-                                </p>
-                            );
-                        })}
+                        {Object.keys(nameErr).map((key, index) => (
+                            <p className={"help is-danger"} key={index}>
+                                {nameErr[key]}
+                            </p>
+                        ))}
                     </div>
                 </div>
 
@@ -111,13 +109,11 @@ const Register = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        {Object.keys(emailErr).map((key) => {
-                            return (
-                                <p className={"help is-danger"}>
-                                    {emailErr[key]}
-                                </p>
-                            );
-                        })}
+                        {Object.keys(emailErr).map((key, index) => (
+                            <p className={"help is-danger"} key={index}>
+                                {emailErr[key]}
+                            </p>
+                        ))}
                     </div>
                 </div>
 
@@ -131,13 +127,11 @@ const Register = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    {Object.keys(passwordErr).map((key) => {
-                        return (
-                            <p className={"help is-danger"}>
-                                {passwordErr[key]}
-                            </p>
-                        );
-                    })}
+                    {Object.keys(passwordErr).map((key, index) => (
+                        <p className={"help is-danger"} key={index}>
+                            {passwordErr[key]}
+                        </p>
+                    ))}
                 </div>
 
                 <div className={"register-icon mt-5"}>
@@ -154,13 +148,11 @@ const Register = () => {
                                 onChange={handleColor}
                             />
                         </div>
-                        {Object.keys(colorErr).map((key) => {
-                            return (
-                                <p className={"help is-danger"}>
-                                    {colorErr[key]}
-                                </p>
-                            );
-                        })}
+                        {Object.keys(colorErr).map((key, index) => (
+                            <p className={"help is-danger"} key={index}>
+                                {colorErr[key]}
+                            </p>
+                        ))}
                     </div>
                     <p className={"has-text-centered mt-5"}>
                         <button
