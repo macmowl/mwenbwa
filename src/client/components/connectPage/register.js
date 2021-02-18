@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {CirclePicker} from "react-color";
 import {COLORS_PICKER} from "../../core/constants.js";
+//import {useHistory} from "react-router-dom";
 import {createUser} from "./api-user";
 
 const Register = () => {
@@ -65,6 +66,9 @@ const Register = () => {
             color,
         };
         createUser(user);
+
+        //history.push("/map");
+        //const history = useHistory();
     };
 
     return (
@@ -158,6 +162,7 @@ const Register = () => {
                     <p className={"has-text-centered mt-5"}>
                         <button
                             type={"submit"}
+                            // onClick={() => history.push("/map")}
                             className={
                                 "button btn is-medium is-primary is-rounded"
                             }>
