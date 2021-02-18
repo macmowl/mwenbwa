@@ -9,12 +9,17 @@ const Register = () => {
     const [password, setPassword] = useState("");
     const [color, setColor] = useState("");
 
-    const handleColor = selectedColor => {
+    const handleColor = (selectedColor) => {
         setColor(selectedColor.hex);
     };
+    const [nameErr, setNameErr] = useState({}); //for error
+    const [emailErr, setEmailErr] = useState({});
+    const [passwordErr, setPasswordErr] = useState({});
+    const [colorErr, setColorErr] = useState({});
 
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
+        const isValid = formValidation();
         const user = {
             email,
             username: name,
@@ -23,7 +28,44 @@ const Register = () => {
         };
         createUser(user);
     };
+    const formValidation = () => {
+        const nameErr = {};
+        const emailErr = {};
+        const passwordErr = {};
+        const colorErr = {};
+        let isValid = true;
 
+        if (name.trim().length < 5) {
+            nameErr.nameShort = "Your name is too short!";
+            isValid = false;
+        }
+        if (name.trim().length > 15) {
+            nameErr.nameLong = "Your name is too long!";
+            isValid = false;
+        }
+        if (email.length < 5) {
+            emailErr.emailShort = "Email should be at least 5 characters long";
+        }
+        if (email.split("").filter((x) => x === "@").length !== 1) {
+            emailErr.emailCharact = "Email should contain a @";
+        }
+        if (email.indexOf(".") === -1) {
+            emailErr.emailDot = "Email should contain at least one dot";
+        }
+
+        if (password.length < 6) {
+            passwordErr.passwordShort =
+                "Password should be at least 6 characters long";
+        }
+        if (color.length === 0) {
+            colorErr.colorChoice = "Color can't be empty";
+        }
+        setNameErr(nameErr);
+        setEmailErr(emailErr);
+        setPasswordErr(passwordErr);
+        setColorErr(colorErr);
+        return isValid;
+    };
     return (
         <div className={"border-left is-half column px-6"}>
             <div className={"register-content"}>
@@ -44,8 +86,15 @@ const Register = () => {
                             placeholder={"Enter your name"}
                             name={"name"}
                             value={name}
-                            onChange={e => setName(e.target.value)}
+                            onChange={(e) => setName(e.target.value)}
                         />
+                        {Object.keys(nameErr).map((key) => {
+                            return (
+                                <p className={"help is-danger"}>
+                                    {nameErr[key]}
+                                </p>
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -57,11 +106,18 @@ const Register = () => {
                                 "input has-text-grey is-medium is-rounded"
                             }
                             type={"email"}
-                            placeholder={"Enter your email adress"}
+                            placeholder={"Enter your email address"}
                             name={"email"}
                             value={email}
-                            onChange={e => setEmail(e.target.value)}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
+                        {Object.keys(emailErr).map((key) => {
+                            return (
+                                <p className={"help is-danger"}>
+                                    {emailErr[key]}
+                                </p>
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -73,8 +129,15 @@ const Register = () => {
                         placeholder={"**********"}
                         name={"password"}
                         value={password}
-                        onChange={e => setPassword(e.target.value)}
+                        onChange={(e) => setPassword(e.target.value)}
                     />
+                    {Object.keys(passwordErr).map((key) => {
+                        return (
+                            <p className={"help is-danger"}>
+                                {passwordErr[key]}
+                            </p>
+                        );
+                    })}
                 </div>
 
                 <div className={"register-icon mt-5"}>
@@ -91,12 +154,19 @@ const Register = () => {
                                 onChange={handleColor}
                             />
                         </div>
+                        {Object.keys(colorErr).map((key) => {
+                            return (
+                                <p className={"help is-danger"}>
+                                    {colorErr[key]}
+                                </p>
+                            );
+                        })}
                     </div>
                     <p className={"has-text-centered mt-5"}>
                         <button
                             type={"submit"}
                             className={
-                                "button is-medium is-primary is-rounded"
+                                "button btn is-medium is-primary is-rounded"
                             }>
                             {" Register "}
                         </button>
