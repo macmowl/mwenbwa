@@ -12,7 +12,7 @@ const create = (req, res) => {
         ...req.body,
     });
     tree.save()
-        .then(() => res.status(201).json({message: "Object created"}))
+        .then(() => res.status(201).json({message: "Tree created"}))
         .catch(error => res.status(400).json({error}));
 };
 
