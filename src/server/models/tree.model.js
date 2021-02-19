@@ -4,34 +4,31 @@ import mongoose from "mongoose";
 const treeSchema = mongoose.Schema({
     locked: {
         type: Boolean,
-        required: true,
+        default: false,
     },
     location: {
         type: {
             type: String,
             enum: ["Point"],
-            required: true,
         },
         coordinates: {
             type: [Number],
-            required: true,
         },
     },
     height: {
         type: Number,
-        required: true,
     },
     latinName: {
         type: String,
-        required: true,
     },
     generatedName: {
         type: String,
-        required: true,
     },
     diameter: {
         type: Number,
-        required: true,
+    },
+    leaves: {
+        type: Number,
     },
     owner: {
         type: ObjectId,

@@ -60,6 +60,10 @@ right:0;}
     filter: grayscale(100%);
 }
 
+.heightScreen {
+    height: 100vh;
+}
+
 /* Customize the Clustered Markers */
 .marker-cluster-custom {
     background-image: url('./assets/map-icon/cluster_multi.png');

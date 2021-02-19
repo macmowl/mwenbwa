@@ -1,12 +1,26 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {MapContainer, TileLayer, Marker} from "react-leaflet";
-import treeData from "../../../../data/bintrees.json";
 import {divIcon, point} from "leaflet";
-import TreeIcon from "./../tree-icon";
 import MarkerClusterGroup from "react-leaflet-markercluster";
+import TreeIcon from "./../tree-icon";
 import ReactDomServer from "react-dom/server";
+import axios from "axios";
 
 const LeafletMap = () => {
+    const [treeData, setTreeData] = useState([]);
+    const [treesMarker, setTreesMarker] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        axios
+            .get(`/api/trees`)
+            .then(res => {
+                setTreeData(res.data);
+                setLoading(false);
+            })
+            .catch(err => console.log(err));
+    }, []);
+
     const setIconTree = (shape, color) =>
         divIcon({
             html: ReactDomServer.renderToString(
@@ -19,6 +33,18 @@ const LeafletMap = () => {
             iconAnchor: [19, 54],
         });
 
+    useEffect(() => {
+        setTreesMarker(
+            treeData.map(tree => (
+                <Marker
+                    key={tree._id}
+                    position={tree.location.coordinates.reverse()}
+                    icon={setIconTree(tree.shape, tree.color)}
+                />
+            )),
+        );
+    }, [treeData]);
+
     const createClusterCustomIcon = function (cluster) {
         return divIcon({
             html: `${cluster.getChildCount()}`,
@@ -26,15 +52,20 @@ const LeafletMap = () => {
             iconSize: point(50, 46, true),
         });
     };
-
-    const treesMarker = treeData.map(tree => (
-        <Marker
-            key={tree._id.$oid}
-            position={tree.location.coordinates}
-            icon={setIconTree(tree.shape, tree.color)}
-        />
-    ));
-
+    if (loading) {
+        return (
+            <div
+                className={
+                    "heightScreen columns is-vcentered has-background-light"
+                }>
+                <div className={"column"}>
+                    <h1 className={"is-size-2 has-text-centered"}>
+                        {"Loading"}
+                    </h1>
+                </div>
+            </div>
+        );
+    }
     return (
         <MapContainer center={[50.64497, 5.57333]} zoom={16}>
             <TileLayer
