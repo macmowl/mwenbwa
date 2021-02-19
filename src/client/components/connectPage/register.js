@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {CirclePicker} from "react-color";
 import {COLORS_PICKER} from "../../core/constants.js";
+import {useHistory} from "react-router-dom";
 import {createUser} from "./api-user";
 
 const Register = () => {
@@ -12,16 +13,70 @@ const Register = () => {
     const handleColor = selectedColor => {
         setColor(selectedColor.hex);
     };
+    const [nameErr, setNameErr] = useState({}); //for error
+    const [emailErr, setEmailErr] = useState({});
+    const [passwordErr, setPasswordErr] = useState({});
+    const [colorErr, setColorErr] = useState({});
+    const formValidation = () => {
+        const nameErr1 = {};
+        const emailErr1 = {};
+        const passwordErr1 = {};
+        const colorErr1 = {};
+        let isValid = true;
 
+        if (name.trim().length < 3) {
+            nameErr1.nameShort = "Your name is too short!";
+            isValid = false;
+        }
+        if (name.trim().length > 10) {
+            nameErr1.nameLong = "Your name is too long!";
+            isValid = false;
+        }
+        if (email.length < 5) {
+            emailErr1.emailShort = "Email should be at least 5 characters long";
+        }
+        if (email.split("").filter(x => x === "@").length !== 1) {
+            emailErr1.emailCharact = "Email should contain a @";
+        }
+        if (!email.includes(".")) {
+            emailErr1.emailDot = "Email should contain at least one dot";
+        }
+
+        if (password.length < 6) {
+            passwordErr1.passwordShort =
+                "Password should be at least 6 characters long";
+        }
+        if (color.length === 0) {
+            colorErr1.colorChoice = "Color can't be empty";
+        }
+        setNameErr(nameErr1);
+        setEmailErr(emailErr1);
+        setPasswordErr(passwordErr1);
+        setColorErr(colorErr1);
+        return isValid;
+    };
+    const history = useHistory();
     const handleSubmit = e => {
         e.preventDefault();
-        const user = {
-            email,
-            username: name,
-            password,
-            color,
-        };
-        createUser(user);
+        const isValid = formValidation();
+        if (isValid) {
+            const user = {
+                email,
+                username: name,
+                password,
+                color,
+            };
+
+            createUser(user);
+            history.push("/map");
+            setName("");
+            setEmail("");
+            setPassword("");
+            setColor("");
+        }
+
+        //history.push("/map");
+        //const history = useHistory();
     };
 
     return (
@@ -46,6 +101,11 @@ const Register = () => {
                             value={name}
                             onChange={e => setName(e.target.value)}
                         />
+                        {Object.keys(nameErr).map(key => (
+                            <p className={"help is-danger"} key={name.id}>
+                                {nameErr[key]}
+                            </p>
+                        ))}
                     </div>
                 </div>
 
@@ -57,11 +117,16 @@ const Register = () => {
                                 "input has-text-grey is-medium is-rounded"
                             }
                             type={"email"}
-                            placeholder={"Enter your email adress"}
+                            placeholder={"Enter your email address"}
                             name={"email"}
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                         />
+                        {Object.keys(emailErr).map(key => (
+                            <p className={"help is-danger"} key={email.id}>
+                                {emailErr[key]}
+                            </p>
+                        ))}
                     </div>
                 </div>
 
@@ -75,6 +140,11 @@ const Register = () => {
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                     />
+                    {Object.keys(passwordErr).map(key => (
+                        <p className={"help is-danger"} key={password.id}>
+                            {passwordErr[key]}
+                        </p>
+                    ))}
                 </div>
 
                 <div className={"register-icon mt-5"}>
@@ -91,12 +161,17 @@ const Register = () => {
                                 onChange={handleColor}
                             />
                         </div>
+                        {Object.keys(colorErr).map(key => (
+                            <p className={"help is-danger"} key={color.id}>
+                                {colorErr[key]}
+                            </p>
+                        ))}
                     </div>
                     <p className={"has-text-centered mt-5"}>
                         <button
                             type={"submit"}
                             className={
-                                "button is-medium is-primary is-rounded"
+                                "button btn is-medium is-primary is-rounded"
                             }>
                             {" Register "}
                         </button>
