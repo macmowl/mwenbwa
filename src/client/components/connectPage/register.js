@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {CirclePicker} from "react-color";
 import {COLORS_PICKER} from "../../core/constants.js";
-//import {useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {createUser} from "./api-user";
 
 const Register = () => {
@@ -24,11 +24,11 @@ const Register = () => {
         const colorErr1 = {};
         let isValid = true;
 
-        if (name.trim().length < 5) {
+        if (name.trim().length < 3) {
             nameErr1.nameShort = "Your name is too short!";
             isValid = false;
         }
-        if (name.trim().length > 15) {
+        if (name.trim().length > 10) {
             nameErr1.nameLong = "Your name is too long!";
             isValid = false;
         }
@@ -55,17 +55,25 @@ const Register = () => {
         setColorErr(colorErr1);
         return isValid;
     };
-
+    const history = useHistory();
     const handleSubmit = e => {
         e.preventDefault();
-        formValidation();
-        const user = {
-            email,
-            username: name,
-            password,
-            color,
-        };
-        createUser(user);
+        const isValid = formValidation();
+        if (isValid) {
+            const user = {
+                email,
+                username: name,
+                password,
+                color,
+            };
+
+            createUser(user);
+            history.push("/map");
+            setName("");
+            setEmail("");
+            setPassword("");
+            setColor("");
+        }
 
         //history.push("/map");
         //const history = useHistory();
@@ -162,7 +170,6 @@ const Register = () => {
                     <p className={"has-text-centered mt-5"}>
                         <button
                             type={"submit"}
-                            // onClick={() => history.push("/map")}
                             className={
                                 "button btn is-medium is-primary is-rounded"
                             }>
