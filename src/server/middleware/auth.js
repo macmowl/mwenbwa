@@ -8,7 +8,7 @@ module.exports = function auth(req, res, next) {
     }
 
     try {
-        const decoded = jwt.verify(token, "randomString");
+        const decoded = jwt.verify(token, "RANDOM_TOKEN_SECRET");
         req.user = decoded.user;
         next();
     } catch (e) {

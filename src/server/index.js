@@ -34,14 +34,8 @@ const app = express();
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-
-app.get("/hello", (req, res) => {
-    console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
-    res.send("Hello, World!");
-});
-// Define routes
 app.use("/api/trees", treeRoutes);
-app.use("/api/users", userRoutes);
+app.use("/api/auth", userRoutes);
 
 app.get("*", (req, res) => {
     res.sendFile(path.resolve("./bin/client/index.html"));
