@@ -26,7 +26,7 @@ exports.register = (req, res, next) => {
                 )
                 .catch((error) => res.status(400).json({error}));
         })
-        .catch((error) => res.status(500).json({"AIE AIE ": error}));
+        .catch((error) => res.status(500).json({error}));
 };
 
 exports.login = (req, res, next) => {
@@ -43,10 +43,12 @@ exports.login = (req, res, next) => {
                 // eslint-disable-next-line prettier/prettier
                 .then((valid) => {
                     if (!valid) {
+                        console.log("Login Not Ok");
                         return res
                             .status(401)
                             .json({error: "Mot de passe incorrect !"});
                     }
+                    console.log("Login Ok");
                     res.status(200).json({
                         userId: user._id,
                         token: jwt.sign(
