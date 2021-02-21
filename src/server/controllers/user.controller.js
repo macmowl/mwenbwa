@@ -3,8 +3,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken"); //ensure npm module jsonwebtoken is installed
-//const User = require("../models/user.model"); //must be import
+const jwt = require("jsonwebtoken");
 import User from "../models/user.model";
 const {validationResult} = require("express-validator");
 
@@ -15,9 +14,9 @@ exports.register = (req, res, next) => {
         .then((hash) => {
             const user = new User({
                 email: req.body.email,
-                username: req.body.username, //required
+                username: req.body.username, 
                 password: hash,
-                color: req.body.color, //required//req.body.color, //required
+                color: req.body.color, 
             });
 
             user.save()
