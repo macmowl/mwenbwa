@@ -28,7 +28,7 @@ export const createUser = user =>
 
 export const loginUser = user =>
     axios
-        .post(`/api/users/login`, user)
+        .post(`/api/auth/login`, user)
         .then(res => {
             console.log(res.data);
             return true;
