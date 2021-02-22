@@ -19,6 +19,7 @@ export const createUser = user =>
         })
         .then(() => {
             axios.post(`/api/auth/register`, user);
+            return true;
         })
         .catch(err => {
             console.error(err);
