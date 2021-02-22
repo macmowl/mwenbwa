@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const createUser = user => {
+export const createUser = user =>
     axios
         .get("/api/trees")
         .then(res => {
@@ -20,5 +20,19 @@ export const createUser = user => {
         .then(() => {
             axios.post(`/api/auth/register`, user);
         })
-        .catch(err => console.log(err));
-};
+        .catch(err => {
+            console.error(err);
+            return false;
+        });
+
+export const loginUser = user =>
+    axios
+        .post(`/api/users/login`, user)
+        .then(res => {
+            console.log(res.data);
+            return true;
+        })
+        .catch(err => {
+            console.error(err);
+            return false;
+        });
