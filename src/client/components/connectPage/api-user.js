@@ -24,3 +24,9 @@ export const loginUser = user =>
             console.error(err);
             return false;
         });
+
+export const getRanks = () =>
+    axios
+        .get(`${URL_SERVER}/api/users/ranks`)
+        .then(res => ({succeed: true, data: res.data}))
+        .catch(err => ({succeed: false, error: err}));

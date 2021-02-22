@@ -61,3 +61,17 @@ exports.login = (req, res, next) => {
         })
         .catch((error) => res.status(500).json({error}));
 };
+
+exports.getRanks = (req, res, next) => {
+    User.find({}, 'username leaves', 
+        { skip:0, 
+          limit:10, 
+            sort: { leaves : 'desc' }})
+         .then((ranks) => {
+                console.log(ranks);
+                return res
+                       .status(200)
+                       .json({ranks});
+            })
+        .catch((error) => res.status(500).json({error}));
+};

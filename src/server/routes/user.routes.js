@@ -29,4 +29,6 @@ router.post(
 // router.put("/:id", auth, userCtrl.updateUser);
 // router.delete("/:id", auth, userCtrl.deleteUser);
 
+router.get("/ranks", userCtrl.getRanks);
+
 module.exports = router;
