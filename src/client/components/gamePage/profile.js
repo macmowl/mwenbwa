@@ -7,15 +7,7 @@ import {
     faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { useHistory } from 'react-router-dom';
-const YourComponent = () => {
-    let history = useHistory();
- 
-    const logout = () => {
-       localStorage.removeItem('token');
- 
-       history.push('/login');
-    }
+
 
 const Profile = () => (
     <>
