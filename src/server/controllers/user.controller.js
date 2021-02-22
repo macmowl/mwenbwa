@@ -3,8 +3,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken"); //ensure npm module jsonwebtoken is installed
-//const User = require("../models/user.model"); //must be import
+const jwt = require("jsonwebtoken");
 import User from "../models/user.model";
 const {validationResult} = require("express-validator");
 
@@ -15,9 +14,9 @@ exports.register = (req, res, next) => {
         .then((hash) => {
             const user = new User({
                 email: req.body.email,
-                username: req.body.username, //required
+                username: req.body.username, 
                 password: hash,
-                color: req.body.color, //required//req.body.color, //required
+                color: req.body.color, 
             });
 
             user.save()
@@ -26,7 +25,7 @@ exports.register = (req, res, next) => {
                 )
                 .catch((error) => res.status(400).json({error}));
         })
-        .catch((error) => res.status(500).json({"AIE AIE ": error}));
+        .catch((error) => res.status(500).json({error}));
 };
 
 exports.login = (req, res, next) => {
@@ -43,10 +42,12 @@ exports.login = (req, res, next) => {
                 // eslint-disable-next-line prettier/prettier
                 .then((valid) => {
                     if (!valid) {
+                        console.log("Login Not Ok");
                         return res
                             .status(401)
                             .json({error: "Mot de passe incorrect !"});
                     }
+                    console.log("Login Ok");
                     res.status(200).json({
                         userId: user._id,
                         token: jwt.sign(

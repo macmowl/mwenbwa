@@ -17,6 +17,8 @@ const Register = () => {
     const [emailErr, setEmailErr] = useState({});
     const [passwordErr, setPasswordErr] = useState({});
     const [colorErr, setColorErr] = useState({});
+    const [registerErr, setRegisterErr] = useState({});
+
     const formValidation = () => {
         const nameErr1 = {};
         const emailErr1 = {};
@@ -34,20 +36,25 @@ const Register = () => {
         }
         if (email.length < 5) {
             emailErr1.emailShort = "Email should be at least 5 characters long";
+            isValid = false;
         }
         if (email.split("").filter(x => x === "@").length !== 1) {
             emailErr1.emailCharact = "Email should contain a @";
+            isValid = false;
         }
         if (!email.includes(".")) {
             emailErr1.emailDot = "Email should contain at least one dot";
+            isValid = false;
         }
 
         if (password.length < 6) {
             passwordErr1.passwordShort =
                 "Password should be at least 6 characters long";
+            isValid = false;
         }
         if (color.length === 0) {
             colorErr1.colorChoice = "Color can't be empty";
+            isValid = false;
         }
         setNameErr(nameErr1);
         setEmailErr(emailErr1);
@@ -66,17 +73,21 @@ const Register = () => {
                 password,
                 color,
             };
-
-            createUser(user);
-            history.push("/map");
-            setName("");
-            setEmail("");
-            setPassword("");
-            setColor("");
+            createUser(user).then(registerOk => {
+                if (registerOk) {
+                    setName("");
+                    setEmail("");
+                    setPassword("");
+                    setColor("");
+                    setRegisterErr({});
+                    history.push("/map");
+                } else {
+                    const registerErr1 = {};
+                    registerErr1.registerError = "Error at account creation.";
+                    setRegisterErr(registerErr1);
+                }
+            });
         }
-
-        //history.push("/map");
-        //const history = useHistory();
     };
 
     return (
@@ -102,7 +113,7 @@ const Register = () => {
                             onChange={e => setName(e.target.value)}
                         />
                         {Object.keys(nameErr).map(key => (
-                            <p className={"help is-danger"} key={name.id}>
+                            <p className={"help is-danger"} key={nameErr[key]}>
                                 {nameErr[key]}
                             </p>
                         ))}
@@ -123,7 +134,7 @@ const Register = () => {
                             onChange={e => setEmail(e.target.value)}
                         />
                         {Object.keys(emailErr).map(key => (
-                            <p className={"help is-danger"} key={email.id}>
+                            <p className={"help is-danger"} key={emailErr[key]}>
                                 {emailErr[key]}
                             </p>
                         ))}
@@ -141,7 +152,7 @@ const Register = () => {
                         onChange={e => setPassword(e.target.value)}
                     />
                     {Object.keys(passwordErr).map(key => (
-                        <p className={"help is-danger"} key={password.id}>
+                        <p className={"help is-danger"} key={passwordErr[key]}>
                             {passwordErr[key]}
                         </p>
                     ))}
@@ -162,7 +173,7 @@ const Register = () => {
                             />
                         </div>
                         {Object.keys(colorErr).map(key => (
-                            <p className={"help is-danger"} key={color.id}>
+                            <p className={"help is-danger"} key={colorErr[key]}>
                                 {colorErr[key]}
                             </p>
                         ))}
@@ -176,6 +187,13 @@ const Register = () => {
                             {" Register "}
                         </button>
                     </p>
+                    {Object.keys(registerErr).map(key => (
+                        <p
+                            className={"has-text-centered help is-danger"}
+                            key={registerErr[key]}>
+                            {registerErr[key]}
+                        </p>
+                    ))}
                 </div>
             </form>
         </div>
