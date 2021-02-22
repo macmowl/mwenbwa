@@ -8,9 +8,11 @@ exports.register = (req, res) => {
         .then(hash => {
             const user = new User({
                 email: req.body.email,
-                username: req.body.username, 
+                username: req.body.username,
                 password: hash,
-                color: req.body.color, 
+                color: req.body.color, //required//req.body.color, //required
+                trees: req.body.trees,
+                leaves: req.body.leaves,
             });
 
             user.save()
