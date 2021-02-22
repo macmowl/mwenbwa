@@ -7,6 +7,15 @@ import {
     faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { useHistory } from 'react-router-dom';
+const YourComponent = () => {
+    let history = useHistory();
+ 
+    const logout = () => {
+       localStorage.removeItem('token');
+ 
+       history.push('/login');
+    }
 
 const Profile = () => (
     <>
@@ -33,7 +42,7 @@ const Profile = () => (
                 </div>
 
                 <div className={"column has-text-centered is-size-7"}>
-                    <a className={"has-text-black-ter"}>
+                    <a className={"has-text-black-ter"} onClick={logout}>
                         <FontAwesomeIcon icon={faSignOutAlt} />
                         <span className={"is-block is-small"}>{"Logout"}</span>
                     </a>
