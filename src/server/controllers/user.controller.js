@@ -8,9 +8,9 @@ exports.register = (req, res) => {
         .then(hash => {
             const user = new User({
                 email: req.body.email,
-                username: req.body.username, //required
+                username: req.body.username, 
                 password: hash,
-                color: req.body.color, //required//req.body.color, //required
+                color: req.body.color, 
             });
 
             user.save()
@@ -32,10 +32,12 @@ exports.login = (req, res) => {
                 .compare(req.body.password, user.password)
                 .then(valid => {
                     if (!valid) {
+                        console.log("Login Not Ok");
                         return res
                             .status(401)
                             .json({error: "Incorrect password!"});
                     }
+                    console.log("Login Ok");
                     res.status(200).json({
                         userId: user._id,
                         token: jwt.sign(
