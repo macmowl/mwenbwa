@@ -1,5 +1,4 @@
 export const FREE_TREE_COLORS = ["#547A1B", "#89C72C", "#7FBA28", "#6FA123"];
-export const URL_SERVER = "http://localhost:80";
 
 export const COLORS_PICKER = [
     "#2196f3",
