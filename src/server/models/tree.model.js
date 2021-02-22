@@ -6,6 +6,10 @@ const treeSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    isFree: {
+        type: Boolean,
+        default: true,
+    },
     location: {
         type: {
             type: String,

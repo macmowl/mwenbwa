@@ -11,6 +11,7 @@ import path from "path";
 import mongoose from "mongoose";
 import treeRoutes from "./routes/tree.routes";
 import userRoutes from "./routes/user.routes";
+mongoose.set("useFindAndModify", false);
 
 const {APP_PORT, DB_USER, DB_PASS, DB_NAME} = process.env;
 

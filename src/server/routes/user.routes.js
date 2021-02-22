@@ -3,6 +3,7 @@ const router = express.Router();
 //const auth = require("../middleware/auth");
 const {check} = require("express-validator");
 const userCtrl = require("../controllers/user.controller");
+import addTree from "../middleware/add-new-trees";
 
 // router.get("/", auth, userCtrl.getAllUsers);
 // router.get("/:id", auth, userCtrl.getOneUser);
@@ -16,6 +17,7 @@ router.post(
             "Please enter a password with 6 or more characters",
         ).isLength({min: 6}),
     ],
+    addTree,
     userCtrl.register,
 );
 router.post(

@@ -11,8 +11,8 @@ exports.register = (req, res) => {
                 username: req.body.username,
                 password: hash,
                 color: req.body.color, //required//req.body.color, //required
-                trees: req.body.trees,
-                leaves: req.body.leaves,
+                trees: res.locals.trees,
+                leaves: res.locals.leaves,
             });
 
             user.save()
