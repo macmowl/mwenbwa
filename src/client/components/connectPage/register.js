@@ -13,7 +13,7 @@ const Register = () => {
     const handleColor = selectedColor => {
         setColor(selectedColor.hex);
     };
-    const [nameErr, setNameErr] = useState({}); //for error
+    const [nameErr, setNameErr] = useState({});
     const [emailErr, setEmailErr] = useState({});
     const [passwordErr, setPasswordErr] = useState({});
     const [colorErr, setColorErr] = useState({});

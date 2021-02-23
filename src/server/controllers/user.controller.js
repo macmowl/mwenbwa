@@ -64,3 +64,16 @@ exports.logout = (req, res) => {
     res.cookie("token", "expiredtoken", options);
     res.status(200).json({status: "success"});
 };
+
+exports.getRanks = (req, res) => {
+    User.find({}, "username leaves", {
+        skip: 0,
+        limit: 10,
+        sort: {leaves: "desc"},
+    })
+        .then(ranks => {
+            console.log(ranks);
+            return res.status(200).json({ranks});
+        })
+        .catch(error => res.status(500).json({error}));
+};

@@ -26,3 +26,8 @@ export const logoutUser = () =>
     API.get("api/auth/logout")
         .then(res => console.log(res))
         .catch(err => console.error(err));
+
+export const getRanks = () =>
+    API.get(`api/users/ranks`)
+        .then(res => ({succeed: true, data: res.data}))
+        .catch(err => ({succeed: false, error: err}));
