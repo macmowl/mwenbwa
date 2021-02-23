@@ -1,22 +1,28 @@
-import axios from "axios";
+import API from "../../utils/api";
 
 export const createUser = user =>
-    axios
-        .post(`/api/auth/register`, user)
-        .then(() => true)
+    API.post(`/api/auth/register`, user)
+        .then(data => {
+            console.log(data);
+            return true;
+        })
         .catch(err => {
             console.log(err);
             return false;
         });
 
 export const loginUser = user =>
-    axios
-        .post(`/api/auth/login`, user)
+    API.post(`/api/auth/login`, user)
         .then(res => {
-            console.log(res.data);
+            console.log(res);
             return true;
         })
         .catch(err => {
             console.error(err);
             return false;
         });
+
+export const logoutUser = () =>
+    API.get("api/auth/logout")
+        .then(res => console.log(res))
+        .catch(err => console.error(err));

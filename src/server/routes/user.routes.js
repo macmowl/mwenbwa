@@ -28,6 +28,8 @@ router.post(
     ],
     userCtrl.login,
 );
+
+router.get("/logout", userCtrl.logout);
 // router.put("/:id", auth, userCtrl.updateUser);
 // router.delete("/:id", auth, userCtrl.deleteUser);
 

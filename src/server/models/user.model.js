@@ -1,16 +1,20 @@
 import {ObjectId} from "mongodb";
 import mongoose from "mongoose";
-import uniqueValidator from "mongoose-unique-validator";
+import validator from "validator";
 
 const userSchema = mongoose.Schema({
     email: {
         type: String,
-        required: true,
+        required: [true, "Email is required"],
         unique: true,
+        lowercase: true,
+        validate: [validator.isEmail, "Email is invalid"],
     },
     password: {
         type: String,
-        required: true,
+        required: [true, "Password is required"],
+        minLength: 8,
+        select: false,
     },
     avatar: {
         type: String,
@@ -40,6 +44,13 @@ const userSchema = mongoose.Schema({
     },
 });
 
-userSchema.plugin(uniqueValidator);
+// userSchema.methods.generateAuthToken = function() {
+//     const token = jwt.sign(
+//         { _id: this._id,},
+//         "RANDOM_TOKEN_SECRET",
+//         {expiresIn: "24h"},
+//     );
+//     return token;
+//   };
 
 export default mongoose.model("User", userSchema);
