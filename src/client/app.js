@@ -22,7 +22,7 @@ import Error404 from "./components/homePage/error404";
 
 const App = () => {
     // const { user, setUser } = useFindUser();
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(null);
 
     return (
         <Router>
