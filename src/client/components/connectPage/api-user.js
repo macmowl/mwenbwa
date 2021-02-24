@@ -28,6 +28,6 @@ export const logoutUser = () =>
         .catch(err => console.error(err));
 
 export const getRanks = () =>
-    API.get(`api/users/ranks`)
+    API.get(`api/auth/ranks`)
         .then(res => ({succeed: true, data: res.data}))
         .catch(err => ({succeed: false, error: err}));

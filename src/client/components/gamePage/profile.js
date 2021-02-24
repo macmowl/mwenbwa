@@ -8,6 +8,7 @@ import {
     faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {logoutUser} from "../connectPage/api-user";
 
 const Profile = () => {
     const refRanked = useRef(null);
@@ -47,7 +48,9 @@ const Profile = () => {
                     <div className={"column has-text-centered is-size-7"}>
                         <a className={"has-text-black-ter"}>
                             <FontAwesomeIcon icon={faSignOutAlt} />
-                            <span className={"is-block is-small"}>
+                            <span
+                                className={"is-block is-small"}
+                                onClick={() => logoutUser()}>
                                 {"Logout"}
                             </span>
                         </a>

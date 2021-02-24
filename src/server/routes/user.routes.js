@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-//const auth = require("../middleware/auth");
 const {check} = require("express-validator");
 const userCtrl = require("../controllers/user.controller");
 import addTree from "../middleware/add-new-trees";
