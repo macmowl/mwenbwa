@@ -1,10 +1,17 @@
 /* eslint-disable react/jsx-max-depth */
-import React from "react";
-import {useHistory} from "react-router-dom";
+import React, {useContext} from "react";
+import {useHistory, Redirect} from "react-router-dom";
 import Logo from "./logo";
+import {UserContext} from "../../hooks/user-context";
 
 function Home() {
     const history = useHistory();
+    const {user} = useContext(UserContext);
+
+    if (user) {
+        <Redirect to={"/map"} />;
+    }
+
     return (
         <div className={"box"}>
             <div className={"hero-body"}>

@@ -11,7 +11,7 @@ const decryptJwt = async token => {
 exports.secure = async (req, res, next) => {
     let token;
     if (req.cookies) {
-        token = req.cookies.token;
+        token = req.cookies.jwt;
     }
     if (!token || token === "expiredtoken") {
         return res.status(401).json({

@@ -1,13 +1,12 @@
 import React, {useState} from "react";
-import {useHistory} from "react-router-dom";
-import {loginUser} from "./api-user";
+import useAuth from "./api-user";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [emailErr, setEmailErr] = useState({});
     const [passwordErr, setPasswordErr] = useState({});
-    const [loginErr, setLoginErr] = useState({});
+    const [loginErr] = useState({});
 
     const formValidation = () => {
         const emailErr1 = {};
@@ -26,8 +25,9 @@ const Login = () => {
         setPasswordErr(passwordErr1);
         return isValid;
     };
-    const history = useHistory();
-    const handleSubmit = e => {
+    const {loginUser} = useAuth();
+
+    const handleSubmit = async e => {
         e.preventDefault();
         const isValid = formValidation();
         if (isValid) {
@@ -36,18 +36,7 @@ const Login = () => {
                 password,
             };
 
-            loginUser(user).then(loginOk => {
-                if (loginOk) {
-                    setEmail("");
-                    setPassword("");
-                    setLoginErr({});
-                    history.push("/map");
-                } else {
-                    const loginErr1 = {};
-                    loginErr1.loginInvalid = "Login or password incorrect.";
-                    setLoginErr(loginErr1);
-                }
-            });
+            await loginUser(user);
         }
     };
     return (

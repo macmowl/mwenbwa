@@ -6,37 +6,37 @@
  * started at 18/05/2020
  */
 
-import * as React from "react";
+import React, {useState} from "react";
 import ReactDOM from "react-dom";
 import "./style.scss";
-import {BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import "bulma";
-
+// import useFindUser from './hooks/useFindUser';
+import {UserContext} from "./hooks/user-context";
+import PrivateRoute from "./components/private-route";
+import "regenerator-runtime";
 import Home from "./components/homePage/home";
 import ConnectPage from "./components/connectPage/sign";
 import GameMap from "./components/gamePage/map";
 import Error404 from "./components/homePage/error404";
 
-const App = () => (
-    <Router>
-        <div className={"navbar content is-medium ml-6"}>
-            <Link className={"navbar-item"} to={"/"}>
-                {"Home"}
-            </Link>
-            <Link className={"navbar-item"} to={"/map"}>
-                {"map"}
-            </Link>
-            <Link className={"navbar-item"} to={"/sign"}>
-                {"Signin"}
-            </Link>
-        </div>
-        <Switch>
-            <Route exact path={"/"} component={Home} />
-            <Route exact path={"/map"} component={GameMap} />
-            <Route exact path={"/sign"} component={ConnectPage} />
-            <Route path={"/"} component={Error404} />
-        </Switch>
-    </Router>
-);
+const App = () => {
+    // const { user, setUser } = useFindUser();
+    const [user, setUser] = useState({});
+
+    return (
+        <Router>
+            <UserContext.Provider value={{user, setUser}}>
+                <Switch>
+                    <Route exact path={"/"} component={Home} />
+                    <PrivateRoute exact path={"/map"} component={GameMap} />
+                    <Route exact path={"/sign"} component={ConnectPage} />
+                    <Route path={"/"} component={Error404} />
+                </Switch>
+                {console.log(user)}
+            </UserContext.Provider>
+        </Router>
+    );
+};
 
 ReactDOM.render(<App />, document.querySelector("#app"));
