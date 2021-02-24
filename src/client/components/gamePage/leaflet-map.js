@@ -2,8 +2,8 @@ import React, {useState, useEffect} from "react";
 import {MapContainer, TileLayer, Marker} from "react-leaflet";
 import {divIcon, point} from "leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import TreeIcon from "./../tree-icon";
-import ReactDomServer from "react-dom/server";
+/*import TreeIcon from "./../tree-icon";
+import ReactDomServer from "react-dom/server";*/
 import axios from "axios";
 
 const LeafletMap = () => {
@@ -21,7 +21,7 @@ const LeafletMap = () => {
             .catch(err => console.log(err));
     }, []);
 
-    const setIconTree = (shape, color) =>
+    /*const setIconTree = (shape, color) =>
         divIcon({
             html: ReactDomServer.renderToString(
                 <div>
@@ -31,7 +31,7 @@ const LeafletMap = () => {
             className: "",
             iconSize: [19, 54],
             iconAnchor: [19, 54],
-        });
+        });*/
 
     useEffect(() => {
         setTreesMarker(
@@ -39,7 +39,7 @@ const LeafletMap = () => {
                 <Marker
                     key={tree._id}
                     position={tree.location.coordinates.reverse()}
-                    icon={setIconTree(tree.shape, tree.color)}
+                    /*icon={setIconTree(tree.shape, tree.color)}*/
                 />
             )),
         );
