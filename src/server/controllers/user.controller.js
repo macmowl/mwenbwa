@@ -65,7 +65,14 @@ exports.logout = (req, res) => {
     res.status(200).json({status: "success"});
 };
 
+exports.secretContent = (req, res) => {
+    console.log("Req User");
+    console.log(req);
+    res.status(200).json({status: "SECRET CONTENT SHOWN"});
+};
+
 exports.getRanks = (req, res) => {
+    console.log(req);
     User.find({}, "username leaves", {
         skip: 0,
         limit: 10,
