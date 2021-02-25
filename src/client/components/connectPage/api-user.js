@@ -32,7 +32,8 @@ export const getRanks = () =>
         .then(res => ({succeed: true, data: res.data}))
         .catch(err => ({succeed: false, error: err}));
 
-export const getIconTree = () =>
-    API.get /*(`api/auth/treeInfo`)*/
-        .then(res => ({succeed: true, data: res.data}))
-        .catch(err => ({succeed: false, error: err}));
+export const getTreeInfo = (treeId) =>
+        API.get(`api/trees/`+ treeId)
+            .then(res => ({succeed: true, data: res.data}))
+            .catch(err => ({succeed: false, error: err}));
+    
