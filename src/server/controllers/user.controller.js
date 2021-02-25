@@ -76,7 +76,7 @@ exports.checkUser = catchAsync(async (req, res) => {
 
 exports.logout = (req, res) => {
     const options = {
-        expires: new Date(Date.now() + 10000),
+        expires: new Date(Date.now()),
         httpOnly: true,
     };
     res.cookie("jwt", "expiredtoken", options);
