@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import {CirclePicker} from "react-color";
 import {COLORS_PICKER} from "../../core/constants.js";
-import {useHistory} from "react-router-dom";
-import {createUser} from "./api-user";
+import useAuth from "./api-user";
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -13,11 +12,11 @@ const Register = () => {
     const handleColor = selectedColor => {
         setColor(selectedColor.hex);
     };
-    const [nameErr, setNameErr] = useState({}); //for error
+    const [nameErr, setNameErr] = useState({});
     const [emailErr, setEmailErr] = useState({});
     const [passwordErr, setPasswordErr] = useState({});
     const [colorErr, setColorErr] = useState({});
-    const [registerErr, setRegisterErr] = useState({});
+    const [registerErr] = useState({});
 
     const formValidation = () => {
         const nameErr1 = {};
@@ -62,8 +61,10 @@ const Register = () => {
         setColorErr(colorErr1);
         return isValid;
     };
-    const history = useHistory();
-    const handleSubmit = e => {
+
+    const {createUser} = useAuth();
+
+    const handleSubmit = async e => {
         e.preventDefault();
         const isValid = formValidation();
         if (isValid) {
@@ -73,20 +74,8 @@ const Register = () => {
                 password,
                 color,
             };
-            createUser(user).then(registerOk => {
-                if (registerOk) {
-                    setName("");
-                    setEmail("");
-                    setPassword("");
-                    setColor("");
-                    setRegisterErr({});
-                    history.push("/map");
-                } else {
-                    const registerErr1 = {};
-                    registerErr1.registerError = "Error at account creation.";
-                    setRegisterErr(registerErr1);
-                }
-            });
+            console.log("user: ", user);
+            await createUser(user);
         }
     };
 

@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from "react";
-import {MapContainer, TileLayer, Marker} from "react-leaflet";
+import {MapContainer, TileLayer} from "react-leaflet";
 import {divIcon, point} from "leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import TreeIcon from "./../tree-icon";
-import ReactDomServer from "react-dom/server";
+import TreeMarker from "./tree-marker";
 import axios from "axios";
 
 const LeafletMap = () => {
     const [treeData, setTreeData] = useState([]);
-    const [treesMarker, setTreesMarker] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -20,30 +18,6 @@ const LeafletMap = () => {
             })
             .catch(err => console.log(err));
     }, []);
-
-    const setIconTree = (shape, color) =>
-        divIcon({
-            html: ReactDomServer.renderToString(
-                <div>
-                    <TreeIcon shape={shape} color={color} />
-                </div>,
-            ),
-            className: "",
-            iconSize: [19, 54],
-            iconAnchor: [19, 54],
-        });
-
-    useEffect(() => {
-        setTreesMarker(
-            treeData.map(tree => (
-                <Marker
-                    key={tree._id}
-                    position={tree.location.coordinates.reverse()}
-                    icon={setIconTree(tree.shape, tree.color)}
-                />
-            )),
-        );
-    }, [treeData]);
 
     const createClusterCustomIcon = function (cluster) {
         return divIcon({
@@ -66,21 +40,25 @@ const LeafletMap = () => {
             </div>
         );
     }
+
     return (
-        <MapContainer center={[50.64497, 5.57333]} zoom={16}>
-            <TileLayer
-                attribution={
-                    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                }
-                url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
-            />
-            <MarkerClusterGroup
-                iconCreateFunction={createClusterCustomIcon}
-                spiderfyDistanceMultiplier={2}
-                disableClusteringAtZoom={18}>
-                {treesMarker}
-            </MarkerClusterGroup>
-        </MapContainer>
+        <>
+            <MapContainer center={[50.64497, 5.57333]} zoom={16}>
+                <TileLayer
+                    attribution={
+                        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    }
+                    url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+                />
+                <MarkerClusterGroup
+                    iconCreateFunction={createClusterCustomIcon}
+                    spiderfyDistanceMultiplier={2}
+                    disableClusteringAtZoom={18}>
+                    {/* {treesMarker} */}
+                    <TreeMarker data={treeData} />
+                </MarkerClusterGroup>
+            </MapContainer>
+        </>
     );
 };
 

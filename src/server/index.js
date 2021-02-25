@@ -9,8 +9,12 @@
 import express from "express";
 import path from "path";
 import mongoose from "mongoose";
+import viewRouter from "./routes/view.routes";
 import treeRoutes from "./routes/tree.routes";
 import userRoutes from "./routes/user.routes";
+import {secure} from "./middleware/secure";
+import cors from "cors";
+import cookieParser from "cookie-parser";
 mongoose.set("useFindAndModify", false);
 
 const {APP_PORT, DB_USER, DB_PASS, DB_NAME} = process.env;
@@ -33,9 +37,17 @@ mongoose.connection.on("error", () => {
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
+app.use(
+    cors({
+        origin: "http://localhost",
+        credentials: true,
+    }),
+);
+app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use("/api/trees", treeRoutes);
+app.use("/", viewRouter);
+app.use("/api/trees", secure, treeRoutes);
 app.use("/api/auth", userRoutes);
 
 app.get("*", (req, res) => {
