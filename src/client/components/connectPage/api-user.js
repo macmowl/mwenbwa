@@ -39,17 +39,21 @@ export default function useAuth() {
         return log;
     };
 
+    const logoutUser = () =>
+        API.get("api/auth/logout")
+            .then(() => {
+                setUser(null);
+                history.push("/");
+            })
+            .catch(err => console.error(err));
+
     return {
         createUser,
         loginUser,
+        logoutUser,
         error,
     };
 }
-
-export const logoutUser = () =>
-    API.get("api/auth/logout")
-        .then(res => console.log(res))
-        .catch(err => console.error(err));
 
 export const getRanks = () =>
     API.get(`api/auth/ranks`)

@@ -1,6 +1,7 @@
 import React, {useRef} from "react";
 import UserDetails from "./user-details";
 import Ranked from "./ranked";
+import useAuth from "./../connectPage/api-user";
 
 import {
     faClock,
@@ -8,10 +9,10 @@ import {
     faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {logoutUser} from "../connectPage/api-user";
 
 const Profile = () => {
     const refRanked = useRef(null);
+    const {logoutUser} = useAuth();
 
     const showRanks = () => {
         refRanked.current.showModal();
