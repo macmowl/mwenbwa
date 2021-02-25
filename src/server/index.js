@@ -9,6 +9,7 @@
 import express from "express";
 import path from "path";
 import mongoose from "mongoose";
+import viewRouter from "./routes/view.routes";
 import treeRoutes from "./routes/tree.routes";
 import userRoutes from "./routes/user.routes";
 import {secure} from "./middleware/secure";
@@ -45,6 +46,7 @@ app.use(
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use("/", viewRouter);
 app.use("/api/trees", secure, treeRoutes);
 app.use("/api/auth", userRoutes);
 
