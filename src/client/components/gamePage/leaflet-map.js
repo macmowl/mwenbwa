@@ -1,26 +1,26 @@
 import React, {useState, useEffect} from "react";
-import {MapContainer, TileLayer} from "react-leaflet";
+import {MapContainer, TileLayer, Marker} from "react-leaflet";
 import {divIcon, point} from "leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import TreeMarker from "./tree-marker";
+import TreeIcon from "./../tree-icon";
+// import TreeMarker from "./tree-marker";
 import axios from "axios";
+import ReactDomServer from "react-dom/server";
 
-const LeafletMap = ({ onSelectedTreeChanged}) => {
- 
+const LeafletMap = ({onSelectedTreeChanged}) => {
     const [treeData, setTreeData] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [treesMarker, setTreesMarker] = useState(true);
 
     useEffect(() => {
         axios
             .get(`/api/trees`)
             .then(res => {
-                
                 setTreeData(res.data);
                 setLoading(false);
             })
             .catch(err => console.log(err));
     }, []);
-
 
     const setIconTree = (shape, color) =>
         divIcon({
@@ -34,31 +34,28 @@ const LeafletMap = ({ onSelectedTreeChanged}) => {
             iconAnchor: [19, 54],
         });
 
-    const markerClick = event => 
-    {
-        let treeId = event.sourceTarget.options["data-id"];
+    const markerClick = event => {
+        const treeId = event.sourceTarget.options["data-id"];
         onSelectedTreeChanged(treeId);
-    }
+    };
 
     useEffect(() => {
         setTreesMarker(
             treeData.map(tree => (
-                <Marker 
+                <Marker
                     data-id={tree._id}
                     key={tree._id}
                     position={tree.location.coordinates.reverse()}
                     icon={setIconTree(tree.shape, tree.color)}
                     eventHandlers={{
-                        click: (e) => {
+                        click: e => {
                             markerClick(e);
                         },
-                      }}
-                
+                    }}
                 />
             )),
         );
     }, [treeData]);
-
 
     const createClusterCustomIcon = function (cluster) {
         return divIcon({
@@ -95,8 +92,8 @@ const LeafletMap = ({ onSelectedTreeChanged}) => {
                     iconCreateFunction={createClusterCustomIcon}
                     spiderfyDistanceMultiplier={2}
                     disableClusteringAtZoom={18}>
-                    {/* {treesMarker} */}
-                    <TreeMarker data={treeData} />
+                    {treesMarker}
+                    {/* <TreeMarker data={treeData} /> */}
                 </MarkerClusterGroup>
             </MapContainer>
         </>

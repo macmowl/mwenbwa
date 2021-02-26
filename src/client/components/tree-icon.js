@@ -13,7 +13,6 @@ const TreeIcon = ({shape, color}) => {
     if (fillTree === undefined) {
         /* eslint-disable no-undefined */
         setFillTree(FREE_TREE_COLORS[Math.floor(Math.random() * 4)]);
-        console.log(fillTree);
     }
 
     return (
