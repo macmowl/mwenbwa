@@ -9,8 +9,9 @@ import Tree6 from "../assets/map-icon/tree6.svg";
 
 const TreeIcon = ({shape, color}) => {
     const [fillTree, setFillTree] = useState(color);
-    if (fillTree === null) {
+    if (fillTree === "undefined") {
         setFillTree(FREE_TREE_COLORS[Math.floor(Math.random() * 4)]);
+        console.log(fillTree);
     }
 
     return (
