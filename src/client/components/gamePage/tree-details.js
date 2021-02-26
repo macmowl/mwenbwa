@@ -11,19 +11,18 @@ const TreeDetails = forwardRef((props, ref) => {
     useImperativeHandle(ref, () => ({
 
         DisplayTreeInfo(treeId) {
-
-          getTreeInfo(treeId).then(result => {
-            if (result.succeed) {
-                setTreeInfo(result.data.tree);
-            } else {
-                setError(
-                    `An error occurs while retrieving data :${result.error}`,
-                );
+            getTreeInfo(treeId).then(result => {
+                if (result.succeed) {
+                    setTreeInfo(result.data.tree);
+                } else {
+                    setError(
+                        `An error occurs while retrieving data :${result.error}`,
+                    );
+                }
+            });
             }
-        });
-        }
-    
-      }));
+        
+        }));
 
     return (
         <>

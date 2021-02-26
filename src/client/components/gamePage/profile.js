@@ -1,7 +1,7 @@
 import React, {useRef} from "react";
 import UserDetails from "./user-details";
 import Ranked from "./ranked";
-import useAuth from "./../connectPage/api-user";
+import useAuth from "./../../hooks/api-user";
 
 import {
     faClock,
