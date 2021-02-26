@@ -19,6 +19,7 @@ exports.update = async (req, res) => {
                     owner: user._id,
                     isFree: false,
                     owners: tree.owners,
+                    color: user.color,
                 },
             );
             await User.updateOne(
@@ -31,8 +32,8 @@ exports.update = async (req, res) => {
         } else {
             res.status(200).json({
                 free: tree.isFree,
-                money: Boolean(user.leaves >= tree.leaves)
-            })
+                money: Boolean(user.leaves >= tree.leaves),
+            });
         }
 
         res.status(204).json({

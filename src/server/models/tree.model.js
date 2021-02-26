@@ -37,6 +37,9 @@ const treeSchema = mongoose.Schema({
     owner: {
         type: ObjectId,
     },
+    color: {
+        type: String,
+    },
 });
 
 export default mongoose.model("Tree", treeSchema);

@@ -1,15 +1,22 @@
-import React,{ useState,forwardRef, useImperativeHandle } from "react";
+import React, {
+    useState,
+    forwardRef,
+    useImperativeHandle,
+    useContext,
+} from "react";
 import IconLeave from "../gamePage/icons/leaves";
 import IconTree from "../gamePage/icons/tree";
 import useTree from "../../hooks/use-tree";
+import {UserContext} from "../../hooks/user-context";
 
 const TreeDetails = forwardRef((props, ref) => {
+    const {user} = useContext(UserContext);
+    const {buyTree} = useTree();
     const {getTreeInfo} = useTree();
     const [treeInfo, setTreeInfo] = useState(null);
     const [error, setError] = useState(null);
 
     useImperativeHandle(ref, () => ({
-
         DisplayTreeInfo(treeId) {
             getTreeInfo(treeId).then(result => {
                 if (result.succeed) {
@@ -20,68 +27,76 @@ const TreeDetails = forwardRef((props, ref) => {
                     );
                 }
             });
-            }
-        
-        }));
+        },
+    }));
 
+    const handleBuy = e => {
+        e.preventDefault();
+        buyTree(treeInfo._id);
+    };
+    /* eslint-disable */
     return (
         <>
         {(() => {
-      
             if (treeInfo) {
                 return  <div className={"box m-3 has-text-centered"}>
-                    <IconTree />
-                    <p className={"has-text-weight-bold has-text-black"}>
-                        {treeInfo.latinName}
-                    </p>
+                            <IconTree />
+                            <p className={"has-text-weight-bold has-text-black"}>
+                                {"random name"}
+                            </p>
+                            <p className={"is-size-7"}>
+                                {treeInfo.latinName}
+                            </p>
 
-                    <IconLeave />
+                            <IconLeave />
 
-                    {treeInfo.leaves}
-                    <p className={"mt-1 has-text-centered"}>
-                        <a
-                            className={
-                                "button is-small is-info has-text-white is-rounded"
-                            }>
-                            {" Buy "}
-                        </a>
-                    </p>
-                    <div className={"is-inline-block has-text-centered"}>
-                        <table className={"is-inline-block my-4 is-size-7"}>
-                            <thead>
-                                <tr>
-                                    <th>{"Owner"}</th>
-                                </tr>
-                            </thead>
+                            {treeInfo.leaves}
+                            <p className={`mt-1 has-text-centered`}>
+                                <a
+                                    className={
+                                        `button is-small is-info has-text-white is-rounded ${treeInfo.owner === user._id ? "is-hidden" : ""}`
+                                    }
+                                    onClick={handleBuy}
+                                    >
+                                    {" Buy "}
+                                </a>
+                            </p>
+                            <div className={"is-inline-block has-text-centered"}>
+                                <table className={"is-inline-block my-4 is-size-7"}>
+                                    <thead>
+                                        <tr>
+                                            <th>{"Owner"}</th>
+                                        </tr>
+                                    </thead>
 
-                            <tbody>
-                                <tr>
-                                    <td>{"Suzy"}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    <tbody>
+                                        <tr>
+                                            <td>{treeInfo.owner}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
 
-                        <table className={"is-size-7"}>
-                            <thead>
-                                <tr>
-                                    <th>{"Previous owners"}</th>
-                                </tr>
-                            </thead>
+                                <table className={"is-size-7"}>
+                                    <thead>
+                                        <tr>
+                                            <th>{"Previous owners"}</th>
+                                        </tr>
+                                    </thead>
 
-                            <tbody>
-                                <tr>
-                                    <td>{"Luke"}</td>
-                                </tr>
-                                <tr>
-                                    <td>{"Lorelai"}</td>
-                                </tr>
-                                <tr>
-                                    <td>{"Rory"}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                                    <tbody>
+                                        <tr>
+                                            <td>{"Luke"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{"Lorelai"}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{"Rory"}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
             } else if(error) {
                 return <div>
                     <p>{error}</p>
@@ -91,11 +106,10 @@ const TreeDetails = forwardRef((props, ref) => {
                     <p>{"No tree selected"}</p>
                 </div>
             }
-             
-             })()}
-    </>
-
-    );
+            })()}
+        </>
+    )
+    /* eslint-disable */
 });
 
 export default TreeDetails;
