@@ -11,7 +11,7 @@ export default function useTree() {
             userId: user._id,
         })
             .then(res => {
-                console.log(res);
+                console.log(res.data);
             })
             .catch(err => console.log(err));
         return buy;

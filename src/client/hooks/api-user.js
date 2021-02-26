@@ -39,6 +39,13 @@ export default function useAuth() {
         return log;
     };
 
+    const getUser = async id => {
+        const user = await API.post(`/api/auth/${id}`)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+        return user;
+    };
+
     const logoutUser = () =>
         API.get("api/auth/logout")
             .then(() => {
@@ -50,6 +57,7 @@ export default function useAuth() {
     return {
         createUser,
         loginUser,
+        getUser,
         logoutUser,
         error,
     };
