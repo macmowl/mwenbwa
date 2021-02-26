@@ -96,3 +96,17 @@ exports.getRanks = (req, res) => {
         })
         .catch(error => res.status(500).json({error}));
 };
+
+exports.getUserInfo = (req, res) => {
+    console.log(req);
+    User.find({}, "username trees leaves", {
+        skip: 0,
+        limit: 1,
+        sort: {leaves: "desc"},
+    })
+        .then(ranks => {
+            console.log(ranks);
+            return res.status(200).json({ranks});
+        })
+        .catch(error => res.status(500).json({error}));
+};
