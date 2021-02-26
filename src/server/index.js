@@ -15,6 +15,7 @@ import userRoutes from "./routes/user.routes";
 import {secure} from "./middleware/secure";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+
 mongoose.set("useFindAndModify", false);
 
 const {APP_PORT, DB_USER, DB_PASS, DB_NAME} = process.env;

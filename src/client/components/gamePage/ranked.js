@@ -14,8 +14,6 @@ const customStyles = {
     overlay: {zIndex: 1000},
 };
 
-//Modal.setAppElement('body');
-
 const Ranked = forwardRef((props, ref) => {
     const [modalShown, setModalShown] = useState(false);
     const [ranks, setRanks] = useState(null);
