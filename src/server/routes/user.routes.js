@@ -4,8 +4,7 @@ const {check} = require("express-validator");
 const userCtrl = require("../controllers/user.controller");
 import addTree from "../middleware/add-new-trees";
 
-// router.get("/", auth, userCtrl.getAllUsers);
-// router.get("/:id", auth, userCtrl.getOneUser);
+router.get("/:id", userCtrl.getUser);
 router.post(
     "/register",
     [

@@ -1,6 +1,6 @@
 import React, {useState, forwardRef, useImperativeHandle} from "react";
 import Modal from "react-modal";
-import {getRanks} from "../connectPage/api-user";
+import {getRanks} from "../../hooks/api-user";
 
 const customStyles = {
     content: {
@@ -13,8 +13,6 @@ const customStyles = {
     },
     overlay: {zIndex: 1000},
 };
-
-//Modal.setAppElement('body');
 
 const Ranked = forwardRef((props, ref) => {
     const [modalShown, setModalShown] = useState(false);

@@ -74,6 +74,12 @@ exports.checkUser = catchAsync(async (req, res) => {
     res.status(200).send({currentUser});
 });
 
+exports.getUser = (req, res) => {
+    User.findOne({_id: req.body._id})
+        .then(user => res.status(200).json({user}))
+        .catch(error => res.status(404).json({error}));
+};
+
 exports.logout = (req, res) => {
     const options = {
         expires: new Date(Date.now()),
