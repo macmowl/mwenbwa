@@ -21,7 +21,7 @@ function UserDetails() {
                             alt={"profile pic"}
                         />
                         <h4>
-                            {"username"}
+                            {user.username}
                             <span className={"ml-1"}>
                                 <svg height={10} width={10}>
                                     <circle
@@ -29,7 +29,7 @@ function UserDetails() {
                                         cy={"5"}
                                         r={"3"}
                                         stroke={"black"}
-                                        fill={"orange"}
+                                        fill={user.color}
                                     />
                                 </svg>
                             </span>
@@ -71,7 +71,7 @@ function UserDetails() {
                                         />
                                     </g>
                                 </svg>
-                                {"10"}
+                                {user.trees.length}
                             </p>
                         </div>
 
@@ -226,7 +226,7 @@ function UserDetails() {
                                     </g>
                                 </svg>
 
-                                {"10"}
+                                {user.leaves}
                             </p>
                         </div>
                     </div>
