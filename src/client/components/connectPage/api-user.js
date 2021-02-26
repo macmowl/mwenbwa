@@ -1,31 +1,59 @@
 import API from "../../utils/api";
+import {useState, useContext} from "react";
+import {useHistory} from "react-router-dom";
+import {UserContext} from "../../hooks/user-context";
 
-export const createUser = user =>
-    API.post(`/api/auth/register`, user)
-        .then(data => {
-            console.log(data);
-            return true;
-        })
-        .catch(err => {
-            console.log(err);
-            return false;
-        });
+export default function useAuth() {
+    const history = useHistory();
+    const {setUser} = useContext(UserContext);
+    const [error, setError] = useState(null);
 
-export const loginUser = user =>
-    API.post(`/api/auth/login`, user)
-        .then(res => {
-            console.log(res);
-            return true;
-        })
-        .catch(err => {
-            console.error(err);
-            return false;
-        });
+    //set user in context and push to map
+    const setUserContext = async () => {
+        await API.get("/user")
+            .then(res => {
+                setUser(res.data.currentUser);
+                history.push("/map");
+            })
+            .catch(err => console.log(err));
+    };
 
-export const logoutUser = () =>
-    API.get("api/auth/logout")
-        .then(res => console.log(res))
-        .catch(err => console.error(err));
+    //create user and set in context
+    const createUser = async user => {
+        const create = await API.post(`/api/auth/register`, user)
+            .then(async () => {
+                await setUserContext();
+            })
+            .catch(err => console.log(err));
+        return create;
+    };
+
+    //login user and set in context
+    const loginUser = async user => {
+        const log = await API.post(`/api/auth/login`, user)
+            .then(async () => {
+                const context = await setUserContext();
+                return context;
+            })
+            .catch(err => setError(err.response.user));
+        return log;
+    };
+
+    const logoutUser = () =>
+        API.get("api/auth/logout")
+            .then(() => {
+                setUser(null);
+                history.push("/");
+            })
+            .catch(err => console.error(err));
+
+    return {
+        createUser,
+        loginUser,
+        logoutUser,
+        error,
+    };
+}
 
 export const getRanks = () =>
     API.get(`api/auth/ranks`)

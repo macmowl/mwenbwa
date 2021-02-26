@@ -76,6 +76,7 @@
     "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-svg-loader": "^3.0.3",
+    "regenerator-runtime": "^0.13.7",
     "sass-loader": "^10.1.1",
     "validator": "^13.5.2"
   },

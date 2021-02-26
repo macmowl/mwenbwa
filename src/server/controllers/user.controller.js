@@ -1,5 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+// const AppError = require('./../utils/AppError');
+const catchAsync = require("./../utils/catch-async");
+const {promisify} = require("util");
 import User from "../models/user.model";
 
 const signJwt = id => jwt.sign({id}, "RANDOM_TOKEN_SECRET", {expiresIn: "24h"});
@@ -11,7 +14,7 @@ const encryptPw = async password => {
 
 const sendToken = (user, statusCode, req, res) => {
     const token = signJwt(user._id);
-    res.cookie("token", token, {
+    res.cookie("jwt", token, {
         expiresIn: "24h",
         httpOnly: true,
     });
@@ -56,19 +59,28 @@ exports.login = async (req, res) => {
     }
 };
 
+exports.checkUser = catchAsync(async (req, res) => {
+    let currentUser;
+    if (req.cookies.jwt) {
+        const token = req.cookies.jwt;
+        const decoded = await promisify(jwt.verify)(
+            token,
+            "RANDOM_TOKEN_SECRET",
+        );
+        currentUser = await User.findById(decoded.id);
+    } else {
+        currentUser = null;
+    }
+    res.status(200).send({currentUser});
+});
+
 exports.logout = (req, res) => {
     const options = {
-        expires: new Date(Date.now() + 10000),
+        expires: new Date(Date.now()),
         httpOnly: true,
     };
-    res.cookie("token", "expiredtoken", options);
+    res.cookie("jwt", "expiredtoken", options);
     res.status(200).json({status: "success"});
-};
-
-exports.secretContent = (req, res) => {
-    console.log("Req User");
-    console.log(req);
-    res.status(200).json({status: "SECRET CONTENT SHOWN"});
 };
 
 exports.getRanks = (req, res) => {

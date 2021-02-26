@@ -1,15 +1,13 @@
 import React, {useState, useEffect} from "react";
-import {MapContainer, TileLayer, Marker} from "react-leaflet";
+import {MapContainer, TileLayer} from "react-leaflet";
 import {divIcon, point} from "leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import TreeIcon from "./../tree-icon";
-import ReactDomServer from "react-dom/server";
+import TreeMarker from "./tree-marker";
 import axios from "axios";
 
 const LeafletMap = ({ onSelectedTreeChanged}) => {
  
     const [treeData, setTreeData] = useState([]);
-    const [treesMarker, setTreesMarker] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -22,6 +20,7 @@ const LeafletMap = ({ onSelectedTreeChanged}) => {
             })
             .catch(err => console.log(err));
     }, []);
+
 
     const setIconTree = (shape, color) =>
         divIcon({
@@ -60,6 +59,7 @@ const LeafletMap = ({ onSelectedTreeChanged}) => {
         );
     }, [treeData]);
 
+
     const createClusterCustomIcon = function (cluster) {
         return divIcon({
             html: `${cluster.getChildCount()}`,
@@ -81,21 +81,25 @@ const LeafletMap = ({ onSelectedTreeChanged}) => {
             </div>
         );
     }
+
     return (
-        <MapContainer center={[50.64497, 5.57333]} zoom={16}>
-            <TileLayer
-                attribution={
-                    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                }
-                url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
-            />
-            <MarkerClusterGroup
-                iconCreateFunction={createClusterCustomIcon}
-                spiderfyDistanceMultiplier={2}
-                disableClusteringAtZoom={18}>
-                {treesMarker}
-            </MarkerClusterGroup>
-        </MapContainer>
+        <>
+            <MapContainer center={[50.64497, 5.57333]} zoom={16}>
+                <TileLayer
+                    attribution={
+                        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    }
+                    url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+                />
+                <MarkerClusterGroup
+                    iconCreateFunction={createClusterCustomIcon}
+                    spiderfyDistanceMultiplier={2}
+                    disableClusteringAtZoom={18}>
+                    {/* {treesMarker} */}
+                    <TreeMarker data={treeData} />
+                </MarkerClusterGroup>
+            </MapContainer>
+        </>
     );
 };
 
