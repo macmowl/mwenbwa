@@ -1,10 +1,10 @@
 import React,{ useState,forwardRef, useImperativeHandle } from "react";
 import IconLeave from "../gamePage/icons/leaves";
 import IconTree from "../gamePage/icons/tree";
-import {getTreeInfo} from "../connectPage/api-user";
+import useTree from "../../hooks/use-tree";
 
-const TreeDetails = forwardRef((props, ref) => 
-{
+const TreeDetails = forwardRef((props, ref) => {
+    const {getTreeInfo} = useTree();
     const [treeInfo, setTreeInfo] = useState(null);
     const [error, setError] = useState(null);
 
@@ -83,15 +83,11 @@ const TreeDetails = forwardRef((props, ref) =>
                         </table>
                     </div>
                 </div>
-            }
-            else if(error)
-            {
+            } else if(error) {
                 return <div>
                     <p>{error}</p>
                 </div>
-            }
-            else
-            {
+            } else {
                     return  <div className={"box m-3 has-text-centered"}>
                     <p>{"No tree selected"}</p>
                 </div>

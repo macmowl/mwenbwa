@@ -1,7 +1,7 @@
-import API from "../../utils/api";
+import API from "../utils/api";
 import {useState, useContext} from "react";
 import {useHistory} from "react-router-dom";
-import {UserContext} from "../../hooks/user-context";
+import {UserContext} from "./user-context";
 
 export default function useAuth() {
     const history = useHistory();
@@ -59,9 +59,3 @@ export const getRanks = () =>
     API.get(`api/auth/ranks`)
         .then(res => ({succeed: true, data: res.data}))
         .catch(err => ({succeed: false, error: err}));
-
-export const getTreeInfo = (treeId) =>
-        API.get(`api/trees/`+ treeId)
-            .then(res => ({succeed: true, data: res.data}))
-            .catch(err => ({succeed: false, error: err}));
-    

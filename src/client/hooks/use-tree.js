@@ -1,6 +1,6 @@
-import API from "../../utils/api";
+import API from "../utils/api";
 import {useContext} from "react";
-import {UserContext} from "../../hooks/user-context";
+import {UserContext} from "./user-context";
 
 export default function useTree() {
     const {user} = useContext(UserContext);
@@ -17,7 +17,14 @@ export default function useTree() {
         return buy;
     };
 
+    const getTreeInfo = treeId => 
+        API.get(`api/trees/`+ treeId)
+            .then(res => ({succeed: true, data: res.data}))
+            .catch(err => ({succeed: false, error: err}))
+    
+
     return {
         buyTree,
+        getTreeInfo
     };
 }
