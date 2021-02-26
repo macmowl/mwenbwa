@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {CirclePicker} from "react-color";
 import {COLORS_PICKER} from "../../core/constants.js";
-import useAuth from "./api-user";
+import useAuth from "./../../hooks/api-user";
 
 const Register = () => {
     const [name, setName] = useState("");
