@@ -5,7 +5,8 @@ import MarkerClusterGroup from "react-leaflet-markercluster";
 import TreeMarker from "./tree-marker";
 import axios from "axios";
 
-const LeafletMap = () => {
+const LeafletMap = ({ onSelectedTreeChanged}) => {
+ 
     const [treeData, setTreeData] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -13,11 +14,51 @@ const LeafletMap = () => {
         axios
             .get(`/api/trees`)
             .then(res => {
+                
                 setTreeData(res.data);
                 setLoading(false);
             })
             .catch(err => console.log(err));
     }, []);
+
+
+    const setIconTree = (shape, color) =>
+        divIcon({
+            html: ReactDomServer.renderToString(
+                <div>
+                    <TreeIcon shape={shape} color={color} />
+                </div>,
+            ),
+            className: "",
+            iconSize: [19, 54],
+            iconAnchor: [19, 54],
+        });
+
+    const markerClick = event => 
+    {
+        let treeId = event.sourceTarget.options["data-id"];
+        onSelectedTreeChanged(treeId);
+    }
+
+    useEffect(() => {
+        setTreesMarker(
+            treeData.map(tree => (
+                <Marker 
+                    data-id={tree._id}
+                    key={tree._id}
+                    position={tree.location.coordinates.reverse()}
+                    icon={setIconTree(tree.shape, tree.color)}
+                    eventHandlers={{
+                        click: (e) => {
+                            markerClick(e);
+                        },
+                      }}
+                
+                />
+            )),
+        );
+    }, [treeData]);
+
 
     const createClusterCustomIcon = function (cluster) {
         return divIcon({
