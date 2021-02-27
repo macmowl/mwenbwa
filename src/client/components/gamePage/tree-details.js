@@ -31,8 +31,9 @@ const TreeDetails = forwardRef((props, ref) => {
     }));
 
     const handleBuy = e => {
+        console.log("clicked", treeInfo._id);
         e.preventDefault();
-        buyTree(treeInfo._id);
+        buyTree(treeInfo._id).then(res => console.log(res));
     };
     /* eslint-disable */
     return (
@@ -42,7 +43,7 @@ const TreeDetails = forwardRef((props, ref) => {
                 return  <div className={"box m-3 has-text-centered"}>
                             <IconTree />
                             <p className={"has-text-weight-bold has-text-black"}>
-                                {"random name"}
+                                {treeInfo.generatedName ? treeInfo.generatedName : 'Unnamed tree 😢'}
                             </p>
                             <p className={"is-size-7"}>
                                 {treeInfo.latinName}
