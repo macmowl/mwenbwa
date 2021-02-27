@@ -78,6 +78,7 @@
     "react-svg-loader": "^3.0.3",
     "regenerator-runtime": "^0.13.7",
     "sass-loader": "^10.1.1",
+    "unique-names-generator": "^4.4.0",
     "validator": "^13.5.2"
   },
   "husky": {
