@@ -12,7 +12,7 @@ const webpack = require("webpack");
 const {resolve} = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-module.exports = env => {
+module.exports = (env) => {
     const plugins = [
         new webpack.EnvironmentPlugin({
             NODE_ENV: env === "dev" ? "development" : "production",
@@ -71,6 +71,27 @@ module.exports = env => {
                             },
                         },
                     ],
+                },
+                {
+                    test: /\.s[ac]ss$/i,
+                    use: ["style-loader", "css-loader", "sass-loader"],
+                },
+                // {
+                //     test: /\.svg$/,
+                //     use: [
+                //         {
+                //             loader: 'svg-url-loader',
+                //             options: {
+                //                 limit: 10000,
+                //             },
+                //         },
+                //     ],
+                // },
+                {
+                    test: /\.svg$/,
+                    use: [{
+                        loader: 'react-svg-loader',
+                    }],
                 },
                 {
                     test: /\.js$/,
