@@ -29,6 +29,8 @@ exports.update = async (req, res) => {
                     trees: user.trees,
                 },
             );
+
+            res.status(200).json(tree);
         } else {
             res.status(200).json({
                 free: tree.isFree,

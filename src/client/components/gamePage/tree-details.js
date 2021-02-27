@@ -54,11 +54,12 @@ const TreeDetails = forwardRef((props, ref) => {
                             <p className={`mt-1 has-text-centered`}>
                                 <a
                                     className={
-                                        `button is-small is-info has-text-white is-rounded ${treeInfo.owner === user._id ? "is-hidden" : ""}`
+                                        `button is-small is-rounded ${treeInfo.owner === user._id ? "is-outlined" : "is-info"}`
                                     }
+                                    disabled={treeInfo.owner === user._id}
                                     onClick={handleBuy}
                                     >
-                                    {" Buy "}
+                                    {treeInfo.owner === user._id ? "Already yours" : " Buy "}
                                 </a>
                             </p>
                             <div className={"is-inline-block has-text-centered"}>
@@ -71,7 +72,7 @@ const TreeDetails = forwardRef((props, ref) => {
 
                                     <tbody>
                                         <tr>
-                                            <td>{treeInfo.owner}</td>
+                                            <td>{treeInfo.owner || '/'}</td>
                                         </tr>
                                     </tbody>
                                 </table>

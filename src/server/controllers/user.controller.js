@@ -76,7 +76,7 @@ exports.checkUser = catchAsync(async (req, res) => {
 
 exports.getUser = (req, res) => {
     User.findOne({_id: req.body._id})
-        .then(user => res.status(200).json({user}))
+        .then(user => res.status(200).json(user))
         .catch(error => res.status(404).json({error}));
 };
 

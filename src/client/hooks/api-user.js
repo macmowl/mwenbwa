@@ -41,7 +41,7 @@ export default function useAuth() {
 
     const getUser = async id => {
         const user = await API.post(`/api/auth/${id}`)
-            .then(res => console.log(res))
+            .then(res => res)
             .catch(err => console.log(err));
         return user;
     };

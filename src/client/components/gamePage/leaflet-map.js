@@ -6,11 +6,13 @@ import TreeIcon from "./../tree-icon";
 // import TreeMarker from "./tree-marker";
 import axios from "axios";
 import ReactDomServer from "react-dom/server";
+import useRefresh from "../../hooks/use-refresh";
 
 const LeafletMap = ({onSelectedTreeChanged}) => {
     const [treeData, setTreeData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [treesMarker, setTreesMarker] = useState(true);
+    const {treeUp} = useRefresh();
 
     useEffect(() => {
         axios
@@ -38,6 +40,22 @@ const LeafletMap = ({onSelectedTreeChanged}) => {
         const treeId = event.sourceTarget.options["data-id"];
         onSelectedTreeChanged(treeId);
     };
+
+    useEffect(() => {
+        if (treeUp != null) {
+            <Marker
+                data-id={treeUp._id}
+                key={treeUp._id}
+                position={treeUp.location.coordinates.reverse()}
+                icon={setIconTree(treeUp.shape, treeUp.color)}
+                eventHandlers={{
+                    click: e => {
+                        markerClick(e);
+                    },
+                }}
+            />;
+        }
+    }, [treeUp]);
 
     useEffect(() => {
         setTreesMarker(
