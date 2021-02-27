@@ -76,26 +76,12 @@ const TreeDetails = forwardRef((props, ref) => {
                                         </tr>
                                     </tbody>
                                 </table>
-
-                                <table className={"is-size-7"}>
-                                    <thead>
-                                        <tr>
-                                            <th>{"Previous owners"}</th>
-                                        </tr>
-                                    </thead>
-
-                                    <tbody>
-                                        <tr>
-                                            <td>{"Luke"}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{"Lorelai"}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{"Rory"}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <p className={"is-size-7 has-text-weight-bold"}>{"Previous owners"}</p>
+                                <ul>
+                                    {treeInfo.owners ? treeInfo.owners.map(owner => (
+                                        <li className={"is-size-7"}>{owner}</li>
+                                    )) : "/"}
+                                </ul>
                             </div>
                         </div>
             } else if(error) {
