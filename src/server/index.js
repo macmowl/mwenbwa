@@ -15,10 +15,11 @@ import userRoutes from "./routes/user.routes";
 import {secure} from "./middleware/secure";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+// import {substractLeafTimer} from './controllers/time.controller';
 
 mongoose.set("useFindAndModify", false);
 
-const {APP_PORT, DB_USER, DB_PASS, DB_NAME} = process.env;
+const {DB_USER, DB_PASS, DB_NAME} = process.env;
 
 // Database Connection URL
 mongoose.Promise = global.Promise;
@@ -55,6 +56,11 @@ app.get("*", (req, res) => {
     res.sendFile(path.resolve("./bin/client/index.html"));
 });
 
-app.listen(APP_PORT, () =>
-    console.log(`🚀 Server is listening on port ${APP_PORT}.`),
+// add leaves timer
+// setInterval(() => {substractLeafTimer()}, 2000);
+
+const server_port = process.env.PORT || 12345;
+
+app.listen(server_port, () =>
+    console.log(`🚀 Server is listening on port ${server_port}.`),
 );
