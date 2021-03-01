@@ -41,7 +41,7 @@ const app = express();
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 app.use(
     cors({
-        origin: "http://localhost",
+        origin: "https://leaf-game.herokuapp.com",
         credentials: true,
     }),
 );
