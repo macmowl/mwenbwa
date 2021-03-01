@@ -3,18 +3,25 @@ import React, {
     forwardRef,
     useImperativeHandle,
     useContext,
+    useEffect,
 } from "react";
 import IconLeave from "../gamePage/icons/leaves";
 import IconTree from "../gamePage/icons/tree";
 import useTree from "../../hooks/use-tree";
 import {UserContext} from "../../hooks/user-context";
+import useRefresh from "../../hooks/use-refresh";
 
 const TreeDetails = forwardRef((props, ref) => {
+    const {treeUp} = useRefresh();
     const {user} = useContext(UserContext);
     const {buyTree} = useTree();
     const {getTreeInfo} = useTree();
     const [treeInfo, setTreeInfo] = useState(null);
     const [error, setError] = useState(null);
+
+    useEffect(() => {
+        console.log(treeUp);
+    }, [treeUp]);
 
     useImperativeHandle(ref, () => ({
         DisplayTreeInfo(treeId) {
