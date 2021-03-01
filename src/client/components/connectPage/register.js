@@ -74,7 +74,6 @@ const Register = () => {
                 password,
                 color,
             };
-            console.log("user: ", user);
             await createUser(user);
         }
     };

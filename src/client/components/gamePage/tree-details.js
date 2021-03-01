@@ -20,7 +20,7 @@ const TreeDetails = forwardRef((props, ref) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        console.log(treeUp);
+        // console.log(treeUp);
     }, [treeUp]);
 
     useImperativeHandle(ref, () => ({
@@ -38,7 +38,6 @@ const TreeDetails = forwardRef((props, ref) => {
     }));
 
     const handleBuy = e => {
-        console.log("clicked", treeInfo._id);
         e.preventDefault();
         buyTree(treeInfo._id).then(res => console.log(res));
     };

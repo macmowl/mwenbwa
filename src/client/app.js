@@ -45,7 +45,6 @@ const App = () => {
                     <Route exact path={"/sign"} component={ConnectPage} />
                     <Route path={"/"} component={Error404} />
                 </Switch>
-                {console.log(user)}
             </UserContext.Provider>
         </Router>
     );
