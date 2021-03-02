@@ -2,7 +2,7 @@
 
 > A wonderful game of tree and leaves.
 
-**Play it on the [LIVE DEMO](https://leaf-game.herokuapp.com/)**
+:seedling: :deciduous_tree: :evergreen_tree: :herb: **Play it on the [LIVE DEMO](https://leaf-game.herokuapp.com/)** :herb: :evergreen_tree: :deciduous_tree: :seedling:	
 
 * * *
 
