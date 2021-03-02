@@ -42,9 +42,9 @@ The project is configured to use  [Prettier](https://prettier.io) & [ESLint](htt
 
 ## Contributors
 
-**Alan MASSARO** [GitHub](https://github.com/macmowl)
-**Caroline JANSEN** [GitHub](https://github.com/iCarolinei)
-**Rachida HADDOUCH** [GitHub](https://github.com/Sanamanel)
-**Sandrine LÊ** [GitHub](https://github.com/SandrineLe)
+- **Alan MASSARO** [GitHub](https://github.com/macmowl)
+- **Caroline JANSEN** [GitHub](https://github.com/iCarolinei)
+- **Rachida HADDOUCH** [GitHub](https://github.com/Sanamanel)
+- **Sandrine LÊ** [GitHub](https://github.com/SandrineLe)
 
 Have fun !
